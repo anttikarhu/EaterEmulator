@@ -26,10 +26,10 @@ namespace EaterEmulator.Tests
         public void OutputsNumberAndHaltsByStepping()
         {
             Emulator emulator = new Emulator();
-            emulator.RAM.Store(0x0, 0b00011111); // LDA 0xF
-            emulator.RAM.Store(0x1, 0b11100000); // OUT
-            emulator.RAM.Store(0x2, 0b11110000); // HLT
-            emulator.RAM.Store(0xF, 62);         // byte: #62
+            emulator.RAM.Store(0x0, LDA.OP_CODE + 0xF);
+            emulator.RAM.Store(0x1, OUT.OP_CODE);
+            emulator.RAM.Store(0x2, HLT.OP_CODE);
+            emulator.RAM.Store(0xF, 62);
 
             emulator.Step();
             emulator.Step();
@@ -71,9 +71,9 @@ namespace EaterEmulator.Tests
         public void AddsTwoNumbersTogetherAndOutputs()
         {
             Emulator emulator = new Emulator();
-            emulator.RAM.Store(0x0, 0b00011111); // LDA 0xF
-            emulator.RAM.Store(0x1, 0b00101110); // ADD 0xE
-            emulator.RAM.Store(0x2, 0b11100000); // OUT
+            emulator.RAM.Store(0x0, LDA.OP_CODE + 0xF);
+            emulator.RAM.Store(0x1, ADD.OP_CODE + 0xE);
+            emulator.RAM.Store(0x2, OUT.OP_CODE);
             emulator.RAM.Store(0xE, 41);
             emulator.RAM.Store(0xF, 21);
 
@@ -101,19 +101,19 @@ namespace EaterEmulator.Tests
         public void CalculatesFibonacciSeries()
         {
             Emulator emulator = new Emulator();
-            emulator.RAM.Store(0x0, 0b01010000);
-            emulator.RAM.Store(0x1, 0b01001101);
-            emulator.RAM.Store(0x2, 0b11100000);
-            emulator.RAM.Store(0x3, 0b01010001);
-            emulator.RAM.Store(0x4, 0b01001110);
-            emulator.RAM.Store(0x5, 0b11100000);
-            emulator.RAM.Store(0x6, 0b00101101);
-            emulator.RAM.Store(0x7, 0b01110000);
-            emulator.RAM.Store(0x8, 0b01001111);
-            emulator.RAM.Store(0x9, 0b00011110);
-            emulator.RAM.Store(0xA, 0b01001101);
-            emulator.RAM.Store(0xB, 0b00011111);
-            emulator.RAM.Store(0xC, 0b01100100);
+            emulator.RAM.Store(0x0, LDI.OP_CODE + 0);
+            emulator.RAM.Store(0x1, STA.OP_CODE + 0xD);
+            emulator.RAM.Store(0x2, OUT.OP_CODE);
+            emulator.RAM.Store(0x3, LDI.OP_CODE + 1);
+            emulator.RAM.Store(0x4, STA.OP_CODE + 0xE);
+            emulator.RAM.Store(0x5, OUT.OP_CODE);
+            emulator.RAM.Store(0x6, ADD.OP_CODE + 0xD);
+            emulator.RAM.Store(0x7, JC.OP_CODE  + 0x0);
+            emulator.RAM.Store(0x8, STA.OP_CODE + 0xF);
+            emulator.RAM.Store(0x9, LDA.OP_CODE + 0xE);
+            emulator.RAM.Store(0xA, STA.OP_CODE + 0xD);
+            emulator.RAM.Store(0xB, LDA.OP_CODE + 0xF);
+            emulator.RAM.Store(0xC, JMP.OP_CODE + 0x4);
             emulator.RAM.Store(0xD, 0);
             emulator.RAM.Store(0xE, 0);
             emulator.RAM.Store(0xF, 0);
@@ -130,6 +130,7 @@ namespace EaterEmulator.Tests
                 }
             }
 
+            Assert.AreEqual(14, values.Count);
             Assert.AreEqual(0, values[0]);
             Assert.AreEqual(1, values[1]);
             Assert.AreEqual(1, values[2]);
