@@ -173,13 +173,51 @@ namespace EaterEmulator.Tests.Operations
             Assert.IsTrue(emulator.GetOperation(0b01100000) is JMP);
             Assert.IsTrue(emulator.GetOperation(0b01110000) is JC);
             Assert.IsTrue(emulator.GetOperation(0b10000000) is JZ);
-            Assert.IsTrue(emulator.GetOperation(0b10010000) is NOP);
-            Assert.IsTrue(emulator.GetOperation(0b10100000) is NOP);
+            Assert.IsTrue(emulator.GetOperation(0b10010000) is BEQ);
+            Assert.IsTrue(emulator.GetOperation(0b10100000) is BNE);
             Assert.IsTrue(emulator.GetOperation(0b10110000) is NOP);
             Assert.IsTrue(emulator.GetOperation(0b11000000) is NOP);
             Assert.IsTrue(emulator.GetOperation(0b11010000) is NOP);
             Assert.IsTrue(emulator.GetOperation(0b11100000) is OUT);
             Assert.IsTrue(emulator.GetOperation(0b11110000) is HLT);
+        }
+
+        [Test]
+        public void TestBEQ()
+        {
+            Emulator emulator = new Emulator();
+            Operation beq = new BEQ(emulator);
+
+            emulator.A.Value = 0;
+            emulator.B.Value = 0;
+            beq.Run(0x1);
+
+            Assert.AreEqual(1, emulator.ProgramCounter);
+
+            emulator.A.Value = 0;
+            emulator.B.Value = 1;
+            beq.Run(0x2);
+
+            Assert.AreEqual(1, emulator.ProgramCounter);
+        }
+
+        [Test]
+        public void TestBNE()
+        {
+            Emulator emulator = new Emulator();
+            Operation bne = new BNE(emulator);
+
+            emulator.A.Value = 0;
+            emulator.B.Value = 0;
+            bne.Run(0x1);
+
+            Assert.AreEqual(0, emulator.ProgramCounter);
+
+            emulator.A.Value = 0;
+            emulator.B.Value = 1;
+            bne.Run(0x2);
+
+            Assert.AreEqual(2, emulator.ProgramCounter);
         }
     }
 }

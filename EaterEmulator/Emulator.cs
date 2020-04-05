@@ -47,8 +47,8 @@ namespace EaterEmulator
             operations.Add(JMP.OP_CODE, new JMP(this));
             operations.Add(JC.OP_CODE, new JC(this));
             operations.Add(JZ.OP_CODE, new JZ(this));
-            operations.Add(0b10010000, new NOP(this));
-            operations.Add(0b10100000, new NOP(this));
+            operations.Add(BEQ.OP_CODE, new BEQ(this));
+            operations.Add(BNE.OP_CODE, new BNE(this));
             operations.Add(0b10110000, new NOP(this));
             operations.Add(0b11000000, new NOP(this));
             operations.Add(0b11010000, new NOP(this));
