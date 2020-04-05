@@ -1,0 +1,6 @@
+.vs
+bin
+obj
+bak
+EaterEmulator.csproj.user
+*.tmp

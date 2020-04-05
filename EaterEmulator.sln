@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29409.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EaterEmulator", "EaterEmulator\EaterEmulator.csproj", "{2779A496-9C90-4E80-8FFB-AEFE0D19C030}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EaterEmulatorTest", "EaterEmulatorTest\EaterEmulatorTest.csproj", "{970B80FC-A434-4668-93E9-928315FE1298}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2779A496-9C90-4E80-8FFB-AEFE0D19C030} = {2779A496-9C90-4E80-8FFB-AEFE0D19C030}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2779A496-9C90-4E80-8FFB-AEFE0D19C030}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2779A496-9C90-4E80-8FFB-AEFE0D19C030}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2779A496-9C90-4E80-8FFB-AEFE0D19C030}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2779A496-9C90-4E80-8FFB-AEFE0D19C030}.Release|Any CPU.Build.0 = Release|Any CPU
+		{970B80FC-A434-4668-93E9-928315FE1298}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{970B80FC-A434-4668-93E9-928315FE1298}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{970B80FC-A434-4668-93E9-928315FE1298}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{970B80FC-A434-4668-93E9-928315FE1298}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {300536BB-3CCA-4146-9188-F2A48A57A63F}
+	EndGlobalSection
+EndGlobal
