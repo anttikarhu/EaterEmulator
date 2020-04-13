@@ -143,7 +143,7 @@ namespace EaterEmulator.Registers.Tests
             signals.FI = true;
 
             flags.Clk();
-            Assert.AreEqual(FlagsRegister.CARRY + FlagsRegister.ZERO, bus.Value);
+            Assert.AreEqual(FlagsRegister.CARRY + FlagsRegister.ZERO, flags.Value);
         }
     }
 }

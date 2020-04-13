@@ -17,6 +17,13 @@ namespace EaterEmulator.Registers
 
         public const byte CARRY = 2;
 
+        public override void Clk()
+        {
+            if (Signals.FI)
+            {
+                Value = Bus.Value;
+            }
+        }
 
         public bool Zero
         {
