@@ -131,5 +131,19 @@ namespace EaterEmulator.Registers.Tests
             instruction.Clk();
             Assert.AreEqual(15, bus.Value);
         }
+
+        [Test]
+        public void FlagsRegisterInputs()
+        {
+            DataBus bus = new DataBus();
+            SignalBus signals = new SignalBus();
+
+            Register flags = new FlagsRegister(bus, signals);
+            bus.Value = FlagsRegister.CARRY + FlagsRegister.ZERO;
+            signals.FI = true;
+
+            flags.Clk();
+            Assert.AreEqual(FlagsRegister.CARRY + FlagsRegister.ZERO, bus.Value);
+        }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EaterEmulator.Registers
 {
-    public class Register
+    public abstract class Register
     {
         public DataBus Bus { get; internal set; }
 
