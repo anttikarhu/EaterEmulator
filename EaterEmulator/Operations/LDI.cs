@@ -19,10 +19,5 @@ namespace EaterEmulator.Operations
         }
 
         public override byte OpCode => OP_CODE;
-
-        public override void Run(byte immediateValue)
-        {
-            emulator.A.Value = (byte) (0b00001111 & immediateValue);
-        }
     }
 }

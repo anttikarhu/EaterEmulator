@@ -339,8 +339,8 @@ namespace EaterEmulator.Tests.Operations
             Assert.IsTrue(emulator.GetOperation(0b01100000) is JMP);
             Assert.IsTrue(emulator.GetOperation(0b01110000) is JC);
             Assert.IsTrue(emulator.GetOperation(0b10000000) is JZ);
-            Assert.IsTrue(emulator.GetOperation(0b10010000) is BEQ);
-            Assert.IsTrue(emulator.GetOperation(0b10100000) is BNE);
+            Assert.IsTrue(emulator.GetOperation(0b10010000) is NOP);
+            Assert.IsTrue(emulator.GetOperation(0b10100000) is NOP);
             Assert.IsTrue(emulator.GetOperation(0b10110000) is NOP);
             Assert.IsTrue(emulator.GetOperation(0b11000000) is NOP);
             Assert.IsTrue(emulator.GetOperation(0b11010000) is NOP);

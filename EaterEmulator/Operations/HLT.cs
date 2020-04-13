@@ -20,10 +20,5 @@ namespace EaterEmulator.Operations
         }
 
         public override byte OpCode => OP_CODE;
-
-        public override void Run(byte none)
-        {
-            emulator.IsHalted = true;
-        }
     }
 }

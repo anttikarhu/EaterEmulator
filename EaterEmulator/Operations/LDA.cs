@@ -25,10 +25,5 @@ namespace EaterEmulator.Operations
             emulator.Signals.RO = true;
             emulator.Signals.AI = true;
         }
-
-        public override void Run(byte srcAddress)
-        {
-            emulator.A.Value = emulator.RAM.Get(srcAddress);
-        }
     }
 }

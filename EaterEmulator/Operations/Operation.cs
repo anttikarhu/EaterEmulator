@@ -13,8 +13,6 @@ namespace EaterEmulator.Operations
             this.emulator = emulator;
         }
 
-        public abstract void Run(byte operand);
-
         public void Clk() {
             switch (emulator.InstructionCounter)
             {
