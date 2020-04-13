@@ -54,9 +54,9 @@ namespace EaterEmulator.Tests
         }
 
         [Test]
-        public void TestFlags()
+        public void ParsesFlags()
         {
-            FlagsRegister flagsRegister = new FlagsRegister(null, null);
+            FlagsRegister flagsRegister = new FlagsRegister(null, null, null);
             flagsRegister.Value = 0;
 
             Assert.IsFalse(flagsRegister.Zero);
@@ -66,6 +66,22 @@ namespace EaterEmulator.Tests
 
             Assert.IsTrue(flagsRegister.Zero);
             Assert.IsTrue(flagsRegister.Carry);
+        }
+
+        [Test]
+        public void StoresFlags()
+        {
+            SignalBus signals = new SignalBus();
+            FlagBus flagBus = new FlagBus();
+
+            FlagsRegister flagsRegister = new FlagsRegister(null, signals, flagBus);
+            flagBus.Carry = true;
+            flagBus.Zero = true;
+            signals.FI = true;
+
+            flagsRegister.Clk();
+
+            Assert.AreEqual(3, flagsRegister.Value);
         }
 
         [Test]
@@ -82,6 +98,22 @@ namespace EaterEmulator.Tests
             emulator.ClkX5();
             emulator.ClkX5();
             Assert.AreEqual(62, emulator.Output.Value);
+        }
+
+        [Test]
+        public void SubstractsTwoNumbersTogetherAndOutputs()
+        {
+            Emulator emulator = new Emulator();
+            emulator.RAM.Store(0x0, LDA.OP_CODE + 0xF);
+            emulator.RAM.Store(0x1, SUB.OP_CODE + 0xE);
+            emulator.RAM.Store(0x2, OUT.OP_CODE);
+            emulator.RAM.Store(0xE, 1);
+            emulator.RAM.Store(0xF, 0);
+
+            emulator.ClkX5();
+            emulator.ClkX5();
+            emulator.ClkX5();
+            Assert.AreEqual(255, emulator.Output.Value);
         }
 
         [Test]
@@ -145,6 +177,64 @@ namespace EaterEmulator.Tests
             Assert.AreEqual(89, values[11]);
             Assert.AreEqual(144, values[12]);
             Assert.AreEqual(233, values[13]);
+        }
+
+        [Test]
+        public void LoadsImmediate()
+        {
+            Emulator emulator = new Emulator();
+            emulator.RAM.Store(0x0, LDI.OP_CODE + 15);
+
+            emulator.ClkX5();
+
+            Assert.AreEqual(15, emulator.A.Value);
+        }
+
+        [Test]
+        public void StoresToRam()
+        {
+            Emulator emulator = new Emulator();
+            emulator.RAM.Store(0x0, LDI.OP_CODE + 15);
+            emulator.RAM.Store(0x1, STA.OP_CODE + 0xF);
+
+            emulator.ClkX5();
+            emulator.ClkX5();
+
+            Assert.AreEqual(15, emulator.RAM.Get(0xF));
+        }
+
+        [Test]
+        public void JumpsWhenCarryEnabled()
+        {
+            Emulator emulator = new Emulator();
+            emulator.RAM.Store(0x0, LDA.OP_CODE + 0xE);
+            emulator.RAM.Store(0x1, ADD.OP_CODE + 0xF);
+            emulator.RAM.Store(0x2, JC.OP_CODE + 0x4);
+            emulator.RAM.Store(0xE, 255);
+            emulator.RAM.Store(0xF, 2);
+
+            emulator.ClkX5();
+            emulator.ClkX5();
+            emulator.ClkX5();
+
+            Assert.AreEqual(0x4, emulator.ProgramCounter.Value);
+        }
+
+        [Test]
+        public void JumpsWhenZeroEnabled()
+        {
+            Emulator emulator = new Emulator();
+            emulator.RAM.Store(0x0, LDA.OP_CODE + 0xE);
+            emulator.RAM.Store(0x1, ADD.OP_CODE + 0xF);
+            emulator.RAM.Store(0x2, JZ.OP_CODE + 0x4);
+            emulator.RAM.Store(0xE, 255);
+            emulator.RAM.Store(0xF, 1);
+
+            emulator.ClkX5();
+            emulator.ClkX5();
+            emulator.ClkX5();
+
+            Assert.AreEqual(0x4, emulator.ProgramCounter.Value);
         }
     }
 }

@@ -32,6 +32,10 @@ namespace EaterEmulator.Registers
             {
                 bus.Value = Value;
             }
+            else if (signals.J)
+            {
+                Value = bus.Value;
+            }
         }
     }
 }

@@ -10,6 +10,8 @@ namespace EaterEmulator
     {
         public DataBus Bus { get; }
 
+        public FlagBus FlagBus { get; }
+
         public SignalBus Signals { get; }
 
         public Register A { get; }
@@ -39,14 +41,15 @@ namespace EaterEmulator
         public Emulator()
         {
             this.Bus = new DataBus();
+            this.FlagBus = new FlagBus();
             this.Signals = new SignalBus();
             this.ProgramCounter = new ProgramCounter(this.Bus, this.Signals);
 
             this.A = new ARegister(Bus, Signals);
             this.B = new BRegister(Bus, Signals);
-            this.Sum = new SumRegister(A, B, Bus, Signals);
+            this.Sum = new SumRegister(A, B, Bus, Signals, FlagBus);
             this.Instruction = new InstructionRegister(Bus, Signals);
-            this.Flags = new FlagsRegister(Bus, Signals);
+            this.Flags = new FlagsRegister(Bus, Signals, FlagBus);
             this.Output = new OutputRegister(Bus, Signals);
             this.MemoryAddress = new MemoryAddressRegister(Bus, Signals);
             this.RAM = new Memory(this.Bus, this.Signals, this.MemoryAddress);
@@ -87,10 +90,10 @@ namespace EaterEmulator
             {
                 InstructionCounter = 0;
             }
-
-            ProgramCounter.Clk();
+       
             RAM.Clk();
             Instruction.Clk();
+            ProgramCounter.Clk();
             MemoryAddress.Clk();
             Sum.Clk();
             A.Clk();

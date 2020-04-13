@@ -56,18 +56,20 @@ namespace EaterEmulator.Registers.Tests
         {
             DataBus bus = new DataBus();
             SignalBus signals = new SignalBus();
+            FlagBus flagBus = new FlagBus();
 
             Register a = new ARegister(bus, signals);
             Register b = new BRegister(bus, signals);
-            Register sum = new SumRegister(a, b, bus, signals);
+            Register sum = new SumRegister(a, b, bus, signals, flagBus);
 
-            a.Value = 11;
-            b.Value = 22;
+            a.Value = 200;
+            b.Value = 100;
 
             signals.EO = true;
             sum.Clk();
 
-            Assert.AreEqual(33, bus.Value);
+            Assert.AreEqual(44, bus.Value);
+            Assert.IsTrue(flagBus.Carry);
         }
 
         [Test]
@@ -75,19 +77,21 @@ namespace EaterEmulator.Registers.Tests
         {
             DataBus bus = new DataBus();
             SignalBus signals = new SignalBus();
+            FlagBus flagBus = new FlagBus();
 
             Register a = new ARegister(bus, signals);
             Register b = new BRegister(bus, signals);
-            Register sum = new SumRegister(a, b, bus, signals);
+            Register sum = new SumRegister(a, b, bus, signals, flagBus);
 
-            a.Value = 100;
-            b.Value = 1;
+            a.Value = 166;
+            b.Value = 166;
 
             signals.EO = true;
             signals.SU = true;
             sum.Clk();
 
-            Assert.AreEqual(99, bus.Value);
+            Assert.AreEqual(0, bus.Value);
+            Assert.IsTrue(flagBus.Zero);
         }
 
         [Test]
@@ -136,10 +140,12 @@ namespace EaterEmulator.Registers.Tests
         public void FlagsRegisterInputs()
         {
             DataBus bus = new DataBus();
+            FlagBus flagBus = new FlagBus();
             SignalBus signals = new SignalBus();
 
-            Register flags = new FlagsRegister(bus, signals);
-            bus.Value = FlagsRegister.CARRY + FlagsRegister.ZERO;
+            Register flags = new FlagsRegister(bus, signals, flagBus);
+            flagBus.Carry = true;
+            flagBus.Zero = true;
             signals.FI = true;
 
             flags.Clk();

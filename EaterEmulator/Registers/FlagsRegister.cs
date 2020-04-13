@@ -6,9 +6,11 @@ namespace EaterEmulator.Registers
 {
     public class FlagsRegister : Register
     {
-        public FlagsRegister(DataBus bus, SignalBus signals) : base(bus, signals)
-        {
+        private FlagBus flagBus;
 
+        public FlagsRegister(DataBus bus, SignalBus signals, FlagBus flagBus) : base(bus, signals)
+        {
+            this.flagBus = flagBus;
         }
 
         public const byte NONE = 0;
@@ -21,7 +23,9 @@ namespace EaterEmulator.Registers
         {
             if (Signals.FI)
             {
-                Value = Bus.Value;
+                Value = 0;
+                Value += flagBus.Zero ? ZERO : (byte) 0;
+                Value += flagBus.Carry ? CARRY : (byte) 0;
             }
         }
 
