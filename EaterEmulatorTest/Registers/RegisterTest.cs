@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EaterEmulator.Tests
+namespace EaterEmulator.Registers.Tests
 {
-    public class ModuleTest
+    public class RegisterTest
     {
         [Test]
         public void ARegisterInputs()
