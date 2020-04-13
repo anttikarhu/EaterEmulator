@@ -48,7 +48,7 @@ namespace EaterEmulator.Tests
             emulator.ProgramCounter.Value = 0;
             emulator.IsHalted = true;
 
-            emulator.Step();
+            emulator.ClkX5();
 
             Assert.AreEqual(0, emulator.ProgramCounter.Value);
         }
@@ -91,7 +91,7 @@ namespace EaterEmulator.Tests
             
             for(int i = 0; i < 17; i++)
             {
-                emulator.Step();
+                emulator.ClkX5();
             }
 
             Assert.AreEqual(1, emulator.ProgramCounter.Value);
