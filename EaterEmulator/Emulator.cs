@@ -8,6 +8,10 @@ namespace EaterEmulator
 {
     public class Emulator
     {
+        public DataBus Bus { get; }
+
+        public SignalBus Signals { get; }
+
         public Register A { get; }
 
         public Register B { get; }
@@ -24,18 +28,23 @@ namespace EaterEmulator
 
         public byte ProgramCounter { get; set; }
 
+        public byte InstructionCounter { get; set; }
+
         public bool IsHalted { get; set; }
 
         private Dictionary<byte, Operation> operations = new Dictionary<byte, Operation>();
 
         public Emulator()
         {
-            this.A = new Register();
-            this.B = new Register();
+            this.Bus = new DataBus();
+            this.Signals = new SignalBus();
+
+            this.A = new ARegister(Bus, Signals);
+            this.B = new Register(Bus, Signals);
             this.Sum = new SumRegister(this);
-            this.Instruction = new Register();
-            this.Flags = new FlagsRegister();
-            this.Output = new Register();
+            this.Instruction = new Register(Bus, Signals);
+            this.Flags = new FlagsRegister(Bus, Signals);
+            this.Output = new OutputRegister(Bus, Signals);
             this.RAM = new Memory();
 
             operations.Add(NOP.OP_CODE, new NOP(this));
@@ -75,6 +84,41 @@ namespace EaterEmulator
             Operation operation = GetOperation(Instruction.Value);
             byte operand = (byte)(Instruction.Value & 0b00001111);
             operation.Run(operand);
+        }
+
+        public void Clk()
+        {
+            if (IsHalted)
+            {
+                return;
+            }
+
+            Signals.Reset();
+
+            Operation operation = GetOperation(Instruction.Value);
+
+            operation.Clk();
+
+            InstructionCounter++;
+            if (InstructionCounter == 4)
+            {
+                InstructionCounter = 0;
+            }
+
+            A.Clk();
+            B.Clk();
+            Sum.Clk();
+            Instruction.Clk();
+            Output.Clk();
+        }
+
+        public void ClkX5()
+        {
+            Clk();
+            Clk();
+            Clk();
+            Clk();
+            Clk();
         }
 
         public Operation GetOperation(byte instructionRegisterValue)

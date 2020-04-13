@@ -6,6 +6,11 @@ namespace EaterEmulator.Registers
 {
     public class FlagsRegister : Register
     {
+        public FlagsRegister(DataBus bus, SignalBus signals) : base(bus, signals)
+        {
+
+        }
+
         public const byte NONE = 0;
 
         public const byte ZERO = 1;

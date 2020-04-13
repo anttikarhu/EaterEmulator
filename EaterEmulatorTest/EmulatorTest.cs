@@ -55,7 +55,7 @@ namespace EaterEmulator.Tests
         [Test]
         public void TestFlags()
         {
-            FlagsRegister flagsRegister = new FlagsRegister();
+            FlagsRegister flagsRegister = new FlagsRegister(null, null);
             flagsRegister.Value = 0;
 
             Assert.IsFalse(flagsRegister.Zero);

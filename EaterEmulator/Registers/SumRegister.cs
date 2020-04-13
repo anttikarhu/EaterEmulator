@@ -8,7 +8,7 @@ namespace EaterEmulator.Registers
     {
         private Emulator emulator;
 
-        public SumRegister(Emulator emulator) : base()
+        public SumRegister(Emulator emulator) : base(emulator.Bus, emulator.Signals)
         {
             this.emulator = emulator;
         }
