@@ -6,11 +6,27 @@ namespace EaterEmulator.Registers
 {
     public class SumRegister : Register
     {
-        private Emulator emulator;
+        private Register aRegister;
 
-        public SumRegister(Emulator emulator) : base(emulator.Bus, emulator.Signals)
+        private Register bRegister;
+
+        public SumRegister(Register aRegister, Register bRegister, DataBus bus, SignalBus signals) : base(bus, signals)
         {
-            this.emulator = emulator;
+            this.aRegister = aRegister;
+            this.bRegister = bRegister;
+        }
+
+        public override void Clk()
+        {
+            if (Signals.SU)
+            {
+                Substract = true;
+            }
+
+            if (Signals.EO)
+            {
+                Bus.Value = Value;
+            }
         }
 
         public override byte Value
@@ -19,14 +35,14 @@ namespace EaterEmulator.Registers
             {
                 if (Substract)
                 {
-                    int sum = emulator.A.Value - emulator.B.Value;
+                    int sum = aRegister.Value - bRegister.Value;
                     Carry = sum < 0;
                     Zero = (byte)sum == 0;
                     return (byte)(sum);
                 }
                 else
                 {
-                    int sum = emulator.A.Value + emulator.B.Value;
+                    int sum = aRegister.Value + bRegister.Value;
                     Carry = sum > 255;
                     Zero = (byte)sum == 0;
                     return (byte)(sum);

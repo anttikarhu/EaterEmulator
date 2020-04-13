@@ -41,7 +41,7 @@ namespace EaterEmulator
 
             this.A = new ARegister(Bus, Signals);
             this.B = new Register(Bus, Signals);
-            this.Sum = new SumRegister(this);
+            this.Sum = new SumRegister(A, B, Bus, Signals);
             this.Instruction = new Register(Bus, Signals);
             this.Flags = new FlagsRegister(Bus, Signals);
             this.Output = new OutputRegister(Bus, Signals);

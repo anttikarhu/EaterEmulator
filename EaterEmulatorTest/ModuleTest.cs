@@ -52,6 +52,45 @@ namespace EaterEmulator.Tests
         }
 
         [Test]
+        public void SumRegisterOutputsSumOfAAndB()
+        {
+            DataBus bus = new DataBus();
+            SignalBus signals = new SignalBus();
+
+            Register a = new ARegister(bus, signals);
+            Register b = new BRegister(bus, signals);
+            Register sum = new SumRegister(a, b, bus, signals);
+
+            a.Value = 11;
+            b.Value = 22;
+
+            signals.EO = true;
+            sum.Clk();
+
+            Assert.AreEqual(33, bus.Value);
+        }
+
+        [Test]
+        public void SumRegisterOutputsSubstractionOfAAndB()
+        {
+            DataBus bus = new DataBus();
+            SignalBus signals = new SignalBus();
+
+            Register a = new ARegister(bus, signals);
+            Register b = new BRegister(bus, signals);
+            Register sum = new SumRegister(a, b, bus, signals);
+
+            a.Value = 100;
+            b.Value = 1;
+
+            signals.EO = true;
+            signals.SU = true;
+            sum.Clk();
+
+            Assert.AreEqual(99, bus.Value);
+        }
+
+        [Test]
         public void OutputRegisterInputs()
         {
             DataBus bus = new DataBus();
