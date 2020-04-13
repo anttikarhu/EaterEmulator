@@ -24,9 +24,11 @@ namespace EaterEmulator
 
         public Register Output { get; }
 
+        public Register MemoryAddress { get; }
+
         public Memory RAM { get; }
 
-        public byte ProgramCounter { get; set; }
+        public ProgramCounter ProgramCounter { get; set; }
 
         public byte InstructionCounter { get; set; }
 
@@ -38,6 +40,7 @@ namespace EaterEmulator
         {
             this.Bus = new DataBus();
             this.Signals = new SignalBus();
+            this.ProgramCounter = new ProgramCounter(this.Bus, this.Signals);
 
             this.A = new ARegister(Bus, Signals);
             this.B = new BRegister(Bus, Signals);
@@ -45,7 +48,8 @@ namespace EaterEmulator
             this.Instruction = new InstructionRegister(Bus, Signals);
             this.Flags = new FlagsRegister(Bus, Signals);
             this.Output = new OutputRegister(Bus, Signals);
-            this.RAM = new Memory();
+            this.MemoryAddress = new MemoryAddressRegister(Bus, Signals);
+            this.RAM = new Memory(this.Bus, this.Signals, this.MemoryAddress);
 
             operations.Add(NOP.OP_CODE, new NOP(this));
             operations.Add(LDA.OP_CODE, new LDA(this));
@@ -73,12 +77,12 @@ namespace EaterEmulator
             }
 
             // Get next instruction from memory and increment program counter
-            Instruction.Value = RAM.Get(ProgramCounter);
-            ProgramCounter++;
+            Instruction.Value = RAM.Get(ProgramCounter.Value);
+            ProgramCounter.Value++;
 
-            if (ProgramCounter >= 16)
+            if (ProgramCounter.Value >= 16)
             {
-                ProgramCounter = 0;
+                ProgramCounter.Value = 0;
             }
 
             Operation operation = GetOperation(Instruction.Value);
@@ -100,15 +104,19 @@ namespace EaterEmulator
             operation.Clk();
 
             InstructionCounter++;
-            if (InstructionCounter == 4)
+            if (InstructionCounter == 5)
             {
                 InstructionCounter = 0;
             }
 
+            ProgramCounter.Clk();
+            RAM.Clk();
+            Instruction.Clk();
+            MemoryAddress.Clk();
+            Sum.Clk();
             A.Clk();
             B.Clk();
-            Sum.Clk();
-            Instruction.Clk();
+            Flags.Clk();
             Output.Clk();
         }
 

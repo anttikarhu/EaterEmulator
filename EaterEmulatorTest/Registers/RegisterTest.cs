@@ -145,5 +145,19 @@ namespace EaterEmulator.Registers.Tests
             flags.Clk();
             Assert.AreEqual(FlagsRegister.CARRY + FlagsRegister.ZERO, flags.Value);
         }
+
+        [Test]
+        public void MemoryAddressRegisterInputs()
+        {
+            DataBus bus = new DataBus();
+            SignalBus signals = new SignalBus();
+
+            Register memoryAddress = new MemoryAddressRegister(bus, signals);
+            bus.Value = 0xF;
+            signals.MI = true;
+
+            memoryAddress.Clk();
+            Assert.AreEqual(0xF, memoryAddress.Value);
+        }
     }
 }

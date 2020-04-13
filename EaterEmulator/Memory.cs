@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EaterEmulator.Registers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,6 +9,19 @@ namespace EaterEmulator
     {
         private byte[] data = new byte[16];
 
+        private DataBus bus;
+
+        private SignalBus signals;
+
+        private Register memoryAddressRegister;
+
+        public Memory(DataBus bus, SignalBus signals, Register memoryAddressRegister)
+        {
+            this.bus = bus;
+            this.signals = signals;
+            this.memoryAddressRegister = memoryAddressRegister;
+        }
+
         public byte Get(byte address)
         {
             return data[address];
@@ -16,6 +30,18 @@ namespace EaterEmulator
         public void Store(byte address, byte value)
         {
             data[address] = value;
+        }
+
+        public void Clk()
+        {
+            if (signals.RO)
+            {
+                bus.Value = data[memoryAddressRegister.Value];
+            }
+            else if (signals.RI)
+            {
+                data[memoryAddressRegister.Value] = bus.Value;
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ namespace EaterEmulator.Operations
 
         public override void Run(byte dstAddress)
         {
-            emulator.ProgramCounter = dstAddress;
+            emulator.ProgramCounter.Value = dstAddress;
         }
     }
 }

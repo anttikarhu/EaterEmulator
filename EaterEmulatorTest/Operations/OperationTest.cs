@@ -92,13 +92,13 @@ namespace EaterEmulator.Tests.Operations
             emulator.Flags.Value = FlagsRegister.NONE;
             Operation jc = new JC(emulator);
             jc.Run(0x2);
-            Assert.AreEqual(0x0, emulator.ProgramCounter);
+            Assert.AreEqual(0x0, emulator.ProgramCounter.Value);
 
             emulator = new Emulator();
             emulator.Flags.Value = FlagsRegister.CARRY;
             jc = new JC(emulator);
             jc.Run(0x2);
-            Assert.AreEqual(0x2, emulator.ProgramCounter);
+            Assert.AreEqual(0x2, emulator.ProgramCounter.Value);
         }
 
         [Test]
@@ -107,7 +107,7 @@ namespace EaterEmulator.Tests.Operations
             Emulator emulator = new Emulator();
             Operation jmp = new JMP(emulator);
             jmp.Run(0x2);
-            Assert.AreEqual(0x2, emulator.ProgramCounter);
+            Assert.AreEqual(0x2, emulator.ProgramCounter.Value);
         }
 
         [Test]
@@ -117,13 +117,13 @@ namespace EaterEmulator.Tests.Operations
             emulator.Flags.Value = FlagsRegister.NONE;
             Operation jz = new JZ(emulator);
             jz.Run(0x2);
-            Assert.AreEqual(0x0, emulator.ProgramCounter);
+            Assert.AreEqual(0x0, emulator.ProgramCounter.Value);
 
             emulator = new Emulator();
             emulator.Flags.Value = FlagsRegister.ZERO;
             jz = new JZ(emulator);
             jz.Run(0x2);
-            Assert.AreEqual(0x2, emulator.ProgramCounter);
+            Assert.AreEqual(0x2, emulator.ProgramCounter.Value);
         }
 
         [Test]
@@ -192,13 +192,13 @@ namespace EaterEmulator.Tests.Operations
             emulator.B.Value = 0;
             beq.Run(0x1);
 
-            Assert.AreEqual(1, emulator.ProgramCounter);
+            Assert.AreEqual(1, emulator.ProgramCounter.Value);
 
             emulator.A.Value = 0;
             emulator.B.Value = 1;
             beq.Run(0x2);
 
-            Assert.AreEqual(1, emulator.ProgramCounter);
+            Assert.AreEqual(1, emulator.ProgramCounter.Value);
         }
 
         [Test]
@@ -211,13 +211,13 @@ namespace EaterEmulator.Tests.Operations
             emulator.B.Value = 0;
             bne.Run(0x1);
 
-            Assert.AreEqual(0, emulator.ProgramCounter);
+            Assert.AreEqual(0, emulator.ProgramCounter.Value);
 
             emulator.A.Value = 0;
             emulator.B.Value = 1;
             bne.Run(0x2);
 
-            Assert.AreEqual(2, emulator.ProgramCounter);
+            Assert.AreEqual(2, emulator.ProgramCounter.Value);
         }
     }
 }

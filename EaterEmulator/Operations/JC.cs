@@ -18,7 +18,7 @@ namespace EaterEmulator.Operations
         {
             if (emulator.Flags.Carry)
             {
-                emulator.ProgramCounter = dstAddress;
+                emulator.ProgramCounter.Value = dstAddress;
             }
         }
     }
