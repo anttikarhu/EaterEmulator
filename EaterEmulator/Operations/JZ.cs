@@ -12,6 +12,15 @@ namespace EaterEmulator.Operations
         {
         }
 
+        public override void Step2()
+        {
+            if (emulator.Flags.Zero)
+            {
+                emulator.Signals.IO = true;
+                emulator.Signals.J = true;
+            }
+        }
+
         public override byte OpCode => OP_CODE;
 
         public override void Run(byte dstAddress)

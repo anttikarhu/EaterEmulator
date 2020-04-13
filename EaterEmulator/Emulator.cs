@@ -69,27 +69,6 @@ namespace EaterEmulator
             operations.Add(HLT.OP_CODE, new HLT(this));
         }
 
-        public void Step()
-        {
-            if (IsHalted)
-            {
-                return;
-            }
-
-            // Get next instruction from memory and increment program counter
-            Instruction.Value = RAM.Get(ProgramCounter.Value);
-            ProgramCounter.Value++;
-
-            if (ProgramCounter.Value >= 16)
-            {
-                ProgramCounter.Value = 0;
-            }
-
-            Operation operation = GetOperation(Instruction.Value);
-            byte operand = (byte)(Instruction.Value & 0b00001111);
-            operation.Run(operand);
-        }
-
         public void Clk()
         {
             if (IsHalted)

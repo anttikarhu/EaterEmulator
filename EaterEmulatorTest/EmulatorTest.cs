@@ -122,7 +122,7 @@ namespace EaterEmulator.Tests
 
             for(int i = 0; i < 114; i++)
             {
-                emulator.Step();
+                emulator.ClkX5();
 
                 if ((byte)(emulator.Instruction.Value & 0b11110000) == OUT.OP_CODE)
                 {
