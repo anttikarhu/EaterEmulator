@@ -13,6 +13,11 @@ namespace EaterEmulator.Operations
 
         }
 
+        public override void Step2()
+        {
+            emulator.IsHalted = true;
+        }
+
         public override byte OpCode => OP_CODE;
 
         public override void Run(byte none)

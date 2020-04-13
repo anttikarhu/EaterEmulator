@@ -11,19 +11,20 @@ namespace EaterEmulator.Tests
     public class EmulatorTest
     {
         [Test]
-        public void StepGetsTheNextInstructionFromRAM()
+        public void ClkGetsTheNextInstructionFromRAM()
         {
             Emulator emulator = new Emulator();
             emulator.RAM.Store(0x0, 0b00010000);
 
-            emulator.Step();
+            emulator.Clk();
+            emulator.Clk();
 
             Assert.AreEqual(LDA.OP_CODE, emulator.Instruction.Value);
             Assert.AreEqual(1, emulator.ProgramCounter.Value);
         }
 
         [Test]
-        public void OutputsNumberAndHaltsByStepping()
+        public void OutputsNumberAndHalts()
         {
             Emulator emulator = new Emulator();
             emulator.RAM.Store(0x0, LDA.OP_CODE + 0xF);
@@ -31,9 +32,9 @@ namespace EaterEmulator.Tests
             emulator.RAM.Store(0x2, HLT.OP_CODE);
             emulator.RAM.Store(0xF, 62);
 
-            emulator.Step();
-            emulator.Step();
-            emulator.Step();
+            emulator.ClkX5();
+            emulator.ClkX5();
+            emulator.ClkX5();
 
             Assert.IsTrue(emulator.IsHalted);
             Assert.AreEqual(3, emulator.ProgramCounter.Value);
