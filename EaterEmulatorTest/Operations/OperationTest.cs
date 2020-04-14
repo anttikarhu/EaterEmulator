@@ -150,7 +150,7 @@ namespace EaterEmulator.Tests.Operations
         public void TestJCCarryEnabled()
         {
             Emulator emulator = new Emulator();
-            emulator.Flags.Value = FlagsRegister.CARRY;
+            emulator.flags.Value = FlagsRegister.CARRY;
             Operation op = new JC(emulator);
 
             emulator.signals.Reset();
@@ -174,7 +174,7 @@ namespace EaterEmulator.Tests.Operations
         public void TestJCCarryDisabled()
         {
             Emulator emulator = new Emulator();
-            emulator.Flags.Value = 0;
+            emulator.flags.Value = 0;
             Operation op = new JC(emulator);
 
             emulator.signals.Reset();
@@ -198,7 +198,7 @@ namespace EaterEmulator.Tests.Operations
         public void TestJMP()
         {
             Emulator emulator = new Emulator();
-            emulator.Flags.Value = FlagsRegister.CARRY;
+            emulator.flags.Value = FlagsRegister.CARRY;
             Operation op = new JMP(emulator);
 
             emulator.signals.Reset();
@@ -222,7 +222,7 @@ namespace EaterEmulator.Tests.Operations
         public void TestJZZeroEnabled()
         {
             Emulator emulator = new Emulator();
-            emulator.Flags.Value = FlagsRegister.ZERO;
+            emulator.flags.Value = FlagsRegister.ZERO;
             Operation op = new JZ(emulator);
 
             emulator.signals.Reset();
@@ -246,7 +246,7 @@ namespace EaterEmulator.Tests.Operations
         public void TestJZZeroDisabled()
         {
             Emulator emulator = new Emulator();
-            emulator.Flags.Value = 0;
+            emulator.flags.Value = 0;
             Operation op = new JZ(emulator);
 
             emulator.signals.Reset();

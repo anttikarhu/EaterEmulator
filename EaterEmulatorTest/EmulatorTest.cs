@@ -19,7 +19,7 @@ namespace EaterEmulator.Tests
             emulator.Clk();
             emulator.Clk();
 
-            Assert.AreEqual(LDA.OP_CODE, emulator.Instruction.Value);
+            Assert.AreEqual(LDA.OP_CODE, emulator.instruction.Value);
             Assert.AreEqual(1, emulator.ProgramCounter.Value);
         }
 
@@ -38,7 +38,7 @@ namespace EaterEmulator.Tests
 
             Assert.IsTrue(emulator.IsHalted);
             Assert.AreEqual(3, emulator.ProgramCounter.Value);
-            Assert.AreEqual(62, emulator.Output.Value);
+            Assert.AreEqual(62, emulator.output.Value);
         }
 
         [Test]
@@ -97,7 +97,7 @@ namespace EaterEmulator.Tests
             emulator.ClkX5();
             emulator.ClkX5();
             emulator.ClkX5();
-            Assert.AreEqual(62, emulator.Output.Value);
+            Assert.AreEqual(62, emulator.output.Value);
         }
 
         [Test]
@@ -113,7 +113,7 @@ namespace EaterEmulator.Tests
             emulator.ClkX5();
             emulator.ClkX5();
             emulator.ClkX5();
-            Assert.AreEqual(255, emulator.Output.Value);
+            Assert.AreEqual(255, emulator.output.Value);
         }
 
         [Test]
@@ -156,9 +156,9 @@ namespace EaterEmulator.Tests
             {
                 emulator.ClkX5();
 
-                if ((byte)(emulator.Instruction.Value & 0b11110000) == OUT.OP_CODE)
+                if ((byte)(emulator.instruction.Value & 0b11110000) == OUT.OP_CODE)
                 {
-                    values.Add(emulator.Output.Value);
+                    values.Add(emulator.output.Value);
                 }
             }
 

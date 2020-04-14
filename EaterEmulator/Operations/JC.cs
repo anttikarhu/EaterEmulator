@@ -14,7 +14,7 @@ namespace EaterEmulator.Operations
 
         public override void Step2()
         {
-            if (emulator.Flags.Carry)
+            if (emulator.flags.Carry)
             {
                 emulator.signals.IO = true;
                 emulator.signals.J = true;
