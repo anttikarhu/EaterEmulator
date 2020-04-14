@@ -51,22 +51,22 @@ namespace EaterEmulator
             this.memoryAddress = new MemoryAddressRegister(bus, signals);
             this.RAM = new Memory(this.bus, this.signals, this.memoryAddress);
 
-            operations.Add(NOP.OP_CODE, new NOP(this));
-            operations.Add(LDA.OP_CODE, new LDA(this));
-            operations.Add(ADD.OP_CODE, new ADD(this));
-            operations.Add(SUB.OP_CODE, new SUB(this));
-            operations.Add(STA.OP_CODE, new STA(this));
-            operations.Add(LDI.OP_CODE, new LDI(this));
-            operations.Add(JMP.OP_CODE, new JMP(this));
-            operations.Add(JC.OP_CODE, new JC(this));
-            operations.Add(JZ.OP_CODE, new JZ(this));
-            operations.Add(0b10010000, new NOP(this));
-            operations.Add(0b10100000, new NOP(this));
-            operations.Add(0b10110000, new NOP(this));
-            operations.Add(0b11000000, new NOP(this));
-            operations.Add(0b11010000, new NOP(this));
-            operations.Add(OUT.OP_CODE, new OUT(this));
-            operations.Add(HLT.OP_CODE, new HLT(this));
+            operations.Add(NOP.OP_CODE, new NOP(this, signals));
+            operations.Add(LDA.OP_CODE, new LDA(this, signals));
+            operations.Add(ADD.OP_CODE, new ADD(this, signals));
+            operations.Add(SUB.OP_CODE, new SUB(this, signals));
+            operations.Add(STA.OP_CODE, new STA(this, signals));
+            operations.Add(LDI.OP_CODE, new LDI(this, signals));
+            operations.Add(JMP.OP_CODE, new JMP(this, signals));
+            operations.Add(JC.OP_CODE, new JC(this, signals));
+            operations.Add(JZ.OP_CODE, new JZ(this, signals));
+            operations.Add(0b10010000, new NOP(this, signals));
+            operations.Add(0b10100000, new NOP(this, signals));
+            operations.Add(0b10110000, new NOP(this, signals));
+            operations.Add(0b11000000, new NOP(this, signals));
+            operations.Add(0b11010000, new NOP(this, signals));
+            operations.Add(OUT.OP_CODE, new OUT(this, signals));
+            operations.Add(HLT.OP_CODE, new HLT(this, signals));
         }
 
         public void Clk()

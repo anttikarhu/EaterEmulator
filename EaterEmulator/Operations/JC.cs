@@ -8,7 +8,7 @@ namespace EaterEmulator.Operations
     {
         public const byte OP_CODE = 0b01110000;
 
-        public JC(Emulator emulator) : base(emulator)
+        public JC(Emulator emulator, SignalBus signals) : base(emulator, signals)
         {
         }
 
@@ -16,8 +16,8 @@ namespace EaterEmulator.Operations
         {
             if (emulator.flags.Carry)
             {
-                emulator.signals.IO = true;
-                emulator.signals.J = true;
+                signals.IO = true;
+                signals.J = true;
             }
         }
         public override byte OpCode => OP_CODE;

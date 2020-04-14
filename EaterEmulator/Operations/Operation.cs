@@ -8,9 +8,12 @@ namespace EaterEmulator.Operations
     {
         protected Emulator emulator;
 
-        public Operation(Emulator emulator)
+        protected SignalBus signals;
+
+        public Operation(Emulator emulator, SignalBus signals)
         {
             this.emulator = emulator;
+            this.signals = signals;
         }
 
         public void Clk() {
@@ -35,14 +38,14 @@ namespace EaterEmulator.Operations
         }
 
         public virtual void Step0() {
-            emulator.signals.MI = true;
-            emulator.signals.CO = true;
+            signals.MI = true;
+            signals.CO = true;
         }
 
         public virtual void Step1() {
-            emulator.signals.RO = true;
-            emulator.signals.II = true;
-            emulator.signals.CE = true;
+            signals.RO = true;
+            signals.II = true;
+            signals.CE = true;
         }
 
         public virtual void Step2() { }

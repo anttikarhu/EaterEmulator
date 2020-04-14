@@ -8,7 +8,7 @@ namespace EaterEmulator.Operations
     {
         public const byte OP_CODE = 0b00000000;
 
-        public NOP(Emulator emulator) : base(emulator)
+        public NOP(Emulator emulator, SignalBus signals) : base(emulator, signals)
         {
         }
 

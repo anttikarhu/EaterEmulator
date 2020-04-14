@@ -8,7 +8,7 @@ namespace EaterEmulator.Operations
     {
         public const byte OP_CODE = 0b10000000;
 
-        public JZ(Emulator emulator) : base(emulator)
+        public JZ(Emulator emulator, SignalBus signals) : base(emulator, signals)
         {
         }
 
@@ -16,8 +16,8 @@ namespace EaterEmulator.Operations
         {
             if (emulator.flags.Zero)
             {
-                emulator.signals.IO = true;
-                emulator.signals.J = true;
+                signals.IO = true;
+                signals.J = true;
             }
         }
 

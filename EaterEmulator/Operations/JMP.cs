@@ -8,14 +8,14 @@ namespace EaterEmulator.Operations
     {
         public const byte OP_CODE = 0b01100000;
 
-        public JMP(Emulator emulator) : base(emulator)
+        public JMP(Emulator emulator, SignalBus signals) : base(emulator, signals)
         {
         }
 
         public override void Step2()
         {
-            emulator.signals.IO = true;
-            emulator.signals.J = true;
+            signals.IO = true;
+            signals.J = true;
         }
 
         public override byte OpCode => OP_CODE;

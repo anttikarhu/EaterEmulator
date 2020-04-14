@@ -8,7 +8,7 @@ namespace EaterEmulator.Operations
     {
         public const byte OP_CODE = 0b00010000;
 
-        public LDA(Emulator emulator) : base(emulator)
+        public LDA(Emulator emulator, SignalBus signals) : base(emulator, signals)
         { 
         }
 
@@ -16,14 +16,14 @@ namespace EaterEmulator.Operations
 
         public override void Step2()
         {
-            emulator.signals.IO = true;
-            emulator.signals.MI = true;
+            signals.IO = true;
+            signals.MI = true;
         }
 
         public override void Step3()
         {
-            emulator.signals.RO = true;
-            emulator.signals.AI = true;
+            signals.RO = true;
+            signals.AI = true;
         }
     }
 }

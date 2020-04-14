@@ -8,14 +8,14 @@ namespace EaterEmulator.Operations
     {
         public const byte OP_CODE = 0b01010000;
 
-        public LDI(Emulator emulator) : base(emulator)
+        public LDI(Emulator emulator, SignalBus signals) : base(emulator, signals)
         {
         }
 
         public override void Step2()
         {
-            emulator.signals.IO = true;
-            emulator.signals.AI = true;
+            signals.IO = true;
+            signals.AI = true;
         }
 
         public override byte OpCode => OP_CODE;

@@ -14,315 +14,320 @@ namespace EaterEmulator.Tests.Operations
         [Test]
         public void TestLDA()
         {
-            Emulator emulator = new Emulator();
-            Operation op = new LDA(emulator);
+            SignalBus signals = new SignalBus();
+            Operation op = new LDA(null, signals);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.signals.MI);
-            Assert.IsTrue(emulator.signals.CO);
+            Assert.IsTrue(signals.MI);
+            Assert.IsTrue(signals.CO);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.signals.RO);
-            Assert.IsTrue(emulator.signals.II);
-            Assert.IsTrue(emulator.signals.CE);
+            Assert.IsTrue(signals.RO);
+            Assert.IsTrue(signals.II);
+            Assert.IsTrue(signals.CE);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step2();
-            Assert.IsTrue(emulator.signals.IO);
-            Assert.IsTrue(emulator.signals.MI);
+            Assert.IsTrue(signals.IO);
+            Assert.IsTrue(signals.MI);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step3();
-            Assert.IsTrue(emulator.signals.RO);
-            Assert.IsTrue(emulator.signals.AI);
+            Assert.IsTrue(signals.RO);
+            Assert.IsTrue(signals.AI);
         }
 
         [Test]
         public void TestSTA()
         {
-            Emulator emulator = new Emulator();
-            Operation op = new STA(emulator);
+            SignalBus signals = new SignalBus();
+            Operation op = new STA(null, signals);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.signals.MI);
-            Assert.IsTrue(emulator.signals.CO);
+            Assert.IsTrue(signals.MI);
+            Assert.IsTrue(signals.CO);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.signals.RO);
-            Assert.IsTrue(emulator.signals.II);
-            Assert.IsTrue(emulator.signals.CE);
+            Assert.IsTrue(signals.RO);
+            Assert.IsTrue(signals.II);
+            Assert.IsTrue(signals.CE);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step2();
-            Assert.IsTrue(emulator.signals.IO);
-            Assert.IsTrue(emulator.signals.MI);
+            Assert.IsTrue(signals.IO);
+            Assert.IsTrue(signals.MI);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step3();
-            Assert.IsTrue(emulator.signals.AO);
-            Assert.IsTrue(emulator.signals.RI);
+            Assert.IsTrue(signals.AO);
+            Assert.IsTrue(signals.RI);
         }
 
         [Test]
         public void TestOUT()
         {
-            Emulator emulator = new Emulator();
-            Operation op = new OUT(emulator);
+            SignalBus signals = new SignalBus();
+            Operation op = new OUT(null, signals);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.signals.MI);
-            Assert.IsTrue(emulator.signals.CO);
+            Assert.IsTrue(signals.MI);
+            Assert.IsTrue(signals.CO);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.signals.RO);
-            Assert.IsTrue(emulator.signals.II);
-            Assert.IsTrue(emulator.signals.CE);
+            Assert.IsTrue(signals.RO);
+            Assert.IsTrue(signals.II);
+            Assert.IsTrue(signals.CE);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step2();
-            Assert.IsTrue(emulator.signals.AO);
-            Assert.IsTrue(emulator.signals.OI);
+            Assert.IsTrue(signals.AO);
+            Assert.IsTrue(signals.OI);
         }
 
         [Test]
         public void TestHLT()
         {
-            Emulator emulator = new Emulator();
-            Operation op = new HLT(emulator);
+            SignalBus signals = new SignalBus();
+            Operation op = new HLT(null, signals);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.signals.MI);
-            Assert.IsTrue(emulator.signals.CO);
+            Assert.IsTrue(signals.MI);
+            Assert.IsTrue(signals.CO);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.signals.RO);
-            Assert.IsTrue(emulator.signals.II);
-            Assert.IsTrue(emulator.signals.CE);
+            Assert.IsTrue(signals.RO);
+            Assert.IsTrue(signals.II);
+            Assert.IsTrue(signals.CE);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step2();
-            Assert.IsTrue(emulator.signals.HLT);
+            Assert.IsTrue(signals.HLT);
         }
 
         [Test]
         public void TestADD()
         {
-            Emulator emulator = new Emulator();
-            Operation op = new ADD(emulator);
+            SignalBus signals = new SignalBus();
+            Operation op = new ADD(null, signals);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.signals.MI);
-            Assert.IsTrue(emulator.signals.CO);
+            Assert.IsTrue(signals.MI);
+            Assert.IsTrue(signals.CO);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.signals.RO);
-            Assert.IsTrue(emulator.signals.II);
-            Assert.IsTrue(emulator.signals.CE);
+            Assert.IsTrue(signals.RO);
+            Assert.IsTrue(signals.II);
+            Assert.IsTrue(signals.CE);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step2();
-            Assert.IsTrue(emulator.signals.IO);
-            Assert.IsTrue(emulator.signals.MI);
+            Assert.IsTrue(signals.IO);
+            Assert.IsTrue(signals.MI);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step3();
-            Assert.IsTrue(emulator.signals.RO);
-            Assert.IsTrue(emulator.signals.BI);
+            Assert.IsTrue(signals.RO);
+            Assert.IsTrue(signals.BI);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step4();
-            Assert.IsTrue(emulator.signals.EO);
-            Assert.IsTrue(emulator.signals.AI);
-            Assert.IsTrue(emulator.signals.FI);
+            Assert.IsTrue(signals.EO);
+            Assert.IsTrue(signals.AI);
+            Assert.IsTrue(signals.FI);
         }
 
         [Test]
         public void TestJCCarryEnabled()
         {
             Emulator emulator = new Emulator();
+            SignalBus signals = emulator.signals;
             emulator.flags.Value = FlagsRegister.CARRY;
-            Operation op = new JC(emulator);
+            Operation op = new JC(emulator, signals);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.signals.MI);
-            Assert.IsTrue(emulator.signals.CO);
+            Assert.IsTrue(signals.MI);
+            Assert.IsTrue(signals.CO);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.signals.RO);
-            Assert.IsTrue(emulator.signals.II);
-            Assert.IsTrue(emulator.signals.CE);
+            Assert.IsTrue(signals.RO);
+            Assert.IsTrue(signals.II);
+            Assert.IsTrue(signals.CE);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step2();
-            Assert.IsTrue(emulator.signals.IO);
-            Assert.IsTrue(emulator.signals.J);
+            Assert.IsTrue(signals.IO);
+            Assert.IsTrue(signals.J);
         }
 
         [Test]
         public void TestJCCarryDisabled()
         {
             Emulator emulator = new Emulator();
+            SignalBus signals = emulator.signals;
             emulator.flags.Value = 0;
-            Operation op = new JC(emulator);
+            Operation op = new JC(emulator, signals);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.signals.MI);
-            Assert.IsTrue(emulator.signals.CO);
+            Assert.IsTrue(signals.MI);
+            Assert.IsTrue(signals.CO);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.signals.RO);
-            Assert.IsTrue(emulator.signals.II);
-            Assert.IsTrue(emulator.signals.CE);
+            Assert.IsTrue(signals.RO);
+            Assert.IsTrue(signals.II);
+            Assert.IsTrue(signals.CE);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step2();
-            Assert.IsFalse(emulator.signals.IO);
-            Assert.IsFalse(emulator.signals.J);
+            Assert.IsFalse(signals.IO);
+            Assert.IsFalse(signals.J);
         }
 
         [Test]
         public void TestJMP()
         {
             Emulator emulator = new Emulator();
+            SignalBus signals = emulator.signals;
             emulator.flags.Value = FlagsRegister.CARRY;
-            Operation op = new JMP(emulator);
+            Operation op = new JMP(emulator, signals);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.signals.MI);
-            Assert.IsTrue(emulator.signals.CO);
+            Assert.IsTrue(signals.MI);
+            Assert.IsTrue(signals.CO);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.signals.RO);
-            Assert.IsTrue(emulator.signals.II);
-            Assert.IsTrue(emulator.signals.CE);
+            Assert.IsTrue(signals.RO);
+            Assert.IsTrue(signals.II);
+            Assert.IsTrue(signals.CE);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step2();
-            Assert.IsTrue(emulator.signals.IO);
-            Assert.IsTrue(emulator.signals.J);
+            Assert.IsTrue(signals.IO);
+            Assert.IsTrue(signals.J);
         }
 
         [Test]
         public void TestJZZeroEnabled()
         {
             Emulator emulator = new Emulator();
+            SignalBus signals = emulator.signals;
             emulator.flags.Value = FlagsRegister.ZERO;
-            Operation op = new JZ(emulator);
+            Operation op = new JZ(emulator, signals);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.signals.MI);
-            Assert.IsTrue(emulator.signals.CO);
+            Assert.IsTrue(signals.MI);
+            Assert.IsTrue(signals.CO);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.signals.RO);
-            Assert.IsTrue(emulator.signals.II);
-            Assert.IsTrue(emulator.signals.CE);
+            Assert.IsTrue(signals.RO);
+            Assert.IsTrue(signals.II);
+            Assert.IsTrue(signals.CE);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step2();
-            Assert.IsTrue(emulator.signals.IO);
-            Assert.IsTrue(emulator.signals.J);
+            Assert.IsTrue(signals.IO);
+            Assert.IsTrue(signals.J);
         }
 
         [Test]
         public void TestJZZeroDisabled()
         {
             Emulator emulator = new Emulator();
+            SignalBus signals = emulator.signals;
             emulator.flags.Value = 0;
-            Operation op = new JZ(emulator);
+            Operation op = new JZ(emulator, signals);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.signals.MI);
-            Assert.IsTrue(emulator.signals.CO);
+            Assert.IsTrue(signals.MI);
+            Assert.IsTrue(signals.CO);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.signals.RO);
-            Assert.IsTrue(emulator.signals.II);
-            Assert.IsTrue(emulator.signals.CE);
+            Assert.IsTrue(signals.RO);
+            Assert.IsTrue(signals.II);
+            Assert.IsTrue(signals.CE);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step2();
-            Assert.IsFalse(emulator.signals.IO);
-            Assert.IsFalse(emulator.signals.J);
+            Assert.IsFalse(signals.IO);
+            Assert.IsFalse(signals.J);
         }
 
 
         [Test]
         public void TestLDI()
         {
-            Emulator emulator = new Emulator();
-            Operation op = new LDI(emulator);
+            SignalBus signals = new SignalBus();
+            Operation op = new LDI(null, signals);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.signals.MI);
-            Assert.IsTrue(emulator.signals.CO);
+            Assert.IsTrue(signals.MI);
+            Assert.IsTrue(signals.CO);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.signals.RO);
-            Assert.IsTrue(emulator.signals.II);
-            Assert.IsTrue(emulator.signals.CE);
+            Assert.IsTrue(signals.RO);
+            Assert.IsTrue(signals.II);
+            Assert.IsTrue(signals.CE);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step2();
-            Assert.IsTrue(emulator.signals.IO);
-            Assert.IsTrue(emulator.signals.AI);
+            Assert.IsTrue(signals.IO);
+            Assert.IsTrue(signals.AI);
         }
 
         [Test]
         public void TestSUB()
         {
-            Emulator emulator = new Emulator();
-            Operation op = new SUB(emulator);
+            SignalBus signals = new SignalBus();
+            Operation op = new SUB(null, signals);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.signals.MI);
-            Assert.IsTrue(emulator.signals.CO);
+            Assert.IsTrue(signals.MI);
+            Assert.IsTrue(signals.CO);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.signals.RO);
-            Assert.IsTrue(emulator.signals.II);
-            Assert.IsTrue(emulator.signals.CE);
+            Assert.IsTrue(signals.RO);
+            Assert.IsTrue(signals.II);
+            Assert.IsTrue(signals.CE);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step2();
-            Assert.IsTrue(emulator.signals.IO);
-            Assert.IsTrue(emulator.signals.MI);
+            Assert.IsTrue(signals.IO);
+            Assert.IsTrue(signals.MI);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step3();
-            Assert.IsTrue(emulator.signals.RO);
-            Assert.IsTrue(emulator.signals.BI);
+            Assert.IsTrue(signals.RO);
+            Assert.IsTrue(signals.BI);
 
-            emulator.signals.Reset();
+            signals.Reset();
             op.Step4();
-            Assert.IsTrue(emulator.signals.EO);
-            Assert.IsTrue(emulator.signals.AI);
-            Assert.IsTrue(emulator.signals.SU);
-            Assert.IsTrue(emulator.signals.FI);
+            Assert.IsTrue(signals.EO);
+            Assert.IsTrue(signals.AI);
+            Assert.IsTrue(signals.SU);
+            Assert.IsTrue(signals.FI);
         }
 
         [Test]
