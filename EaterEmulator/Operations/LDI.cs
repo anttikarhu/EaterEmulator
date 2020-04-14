@@ -14,8 +14,8 @@ namespace EaterEmulator.Operations
 
         public override void Step2()
         {
-            emulator.Signals.IO = true;
-            emulator.Signals.AI = true;
+            emulator.signals.IO = true;
+            emulator.signals.AI = true;
         }
 
         public override byte OpCode => OP_CODE;

@@ -35,14 +35,14 @@ namespace EaterEmulator.Operations
         }
 
         public virtual void Step0() {
-            emulator.Signals.MI = true;
-            emulator.Signals.CO = true;
+            emulator.signals.MI = true;
+            emulator.signals.CO = true;
         }
 
         public virtual void Step1() {
-            emulator.Signals.RO = true;
-            emulator.Signals.II = true;
-            emulator.Signals.CE = true;
+            emulator.signals.RO = true;
+            emulator.signals.II = true;
+            emulator.signals.CE = true;
         }
 
         public virtual void Step2() { }

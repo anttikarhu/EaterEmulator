@@ -16,8 +16,8 @@ namespace EaterEmulator.Operations
         {
             if (emulator.Flags.Carry)
             {
-                emulator.Signals.IO = true;
-                emulator.Signals.J = true;
+                emulator.signals.IO = true;
+                emulator.signals.J = true;
             }
         }
         public override byte OpCode => OP_CODE;

@@ -8,17 +8,17 @@ namespace EaterEmulator
 {
     public class Emulator
     {
-        public DataBus Bus { get; }
+        private readonly DataBus bus = new DataBus();
 
-        public FlagBus FlagBus { get; }
+        private readonly FlagBus flagBus = new FlagBus();
 
-        public SignalBus Signals { get; }
+        public readonly SignalBus signals = new SignalBus();
 
         public Register A { get; }
 
-        public Register B { get; }
+        private readonly Register B;
 
-        public SumRegister Sum { get; }
+        private readonly SumRegister sum;
 
         public Register Instruction { get; }
 
@@ -26,13 +26,13 @@ namespace EaterEmulator
 
         public Register Output { get; }
 
-        public Register MemoryAddress { get; }
+        private readonly Register memoryAddress;
 
         public Memory RAM { get; }
 
-        public ProgramCounter ProgramCounter { get; set; }
+        public ProgramCounter ProgramCounter { get; private set; }
 
-        public byte InstructionCounter { get; set; }
+        public byte InstructionCounter { get; private set; }
 
         public bool IsHalted { get; set; }
 
@@ -40,19 +40,16 @@ namespace EaterEmulator
 
         public Emulator()
         {
-            this.Bus = new DataBus();
-            this.FlagBus = new FlagBus();
-            this.Signals = new SignalBus();
-            this.ProgramCounter = new ProgramCounter(this.Bus, this.Signals);
+            this.ProgramCounter = new ProgramCounter(this.bus, this.signals);
 
-            this.A = new ARegister(Bus, Signals);
-            this.B = new BRegister(Bus, Signals);
-            this.Sum = new SumRegister(A, B, Bus, Signals, FlagBus);
-            this.Instruction = new InstructionRegister(Bus, Signals);
-            this.Flags = new FlagsRegister(Bus, Signals, FlagBus);
-            this.Output = new OutputRegister(Bus, Signals);
-            this.MemoryAddress = new MemoryAddressRegister(Bus, Signals);
-            this.RAM = new Memory(this.Bus, this.Signals, this.MemoryAddress);
+            this.A = new ARegister(bus, signals);
+            this.B = new BRegister(bus, signals);
+            this.sum = new SumRegister(A, B, bus, signals, flagBus);
+            this.Instruction = new InstructionRegister(bus, signals);
+            this.Flags = new FlagsRegister(bus, signals, flagBus);
+            this.Output = new OutputRegister(bus, signals);
+            this.memoryAddress = new MemoryAddressRegister(bus, signals);
+            this.RAM = new Memory(this.bus, this.signals, this.memoryAddress);
 
             operations.Add(NOP.OP_CODE, new NOP(this));
             operations.Add(LDA.OP_CODE, new LDA(this));
@@ -79,7 +76,7 @@ namespace EaterEmulator
                 return;
             }
 
-            Signals.Reset();
+            signals.Reset();
 
             Operation operation = GetOperation(Instruction.Value);
 
@@ -94,8 +91,8 @@ namespace EaterEmulator
             RAM.WriteToBus();
             Instruction.WriteToBus();
             ProgramCounter.WriteToBus();
-            MemoryAddress.WriteToBus();
-            Sum.WriteToBus();
+            memoryAddress.WriteToBus();
+            sum.WriteToBus();
             A.WriteToBus();
             B.WriteToBus();
             Flags.WriteToBus();
@@ -104,12 +101,17 @@ namespace EaterEmulator
             RAM.ReadFromBus();
             Instruction.ReadFromBus();
             ProgramCounter.ReadFromBus();
-            MemoryAddress.ReadFromBus();
-            Sum.ReadFromBus();
+            memoryAddress.ReadFromBus();
+            sum.ReadFromBus();
             A.ReadFromBus();
             B.ReadFromBus();
             Flags.ReadFromBus();
             Output.ReadFromBus();
+
+            if (signals.HLT)
+            {
+                IsHalted = true;
+            }
         }
 
         public void ClkX5()

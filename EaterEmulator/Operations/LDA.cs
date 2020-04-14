@@ -16,14 +16,14 @@ namespace EaterEmulator.Operations
 
         public override void Step2()
         {
-            emulator.Signals.IO = true;
-            emulator.Signals.MI = true;
+            emulator.signals.IO = true;
+            emulator.signals.MI = true;
         }
 
         public override void Step3()
         {
-            emulator.Signals.RO = true;
-            emulator.Signals.AI = true;
+            emulator.signals.RO = true;
+            emulator.signals.AI = true;
         }
     }
 }

@@ -17,26 +17,26 @@ namespace EaterEmulator.Tests.Operations
             Emulator emulator = new Emulator();
             Operation op = new LDA(emulator);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.Signals.MI);
-            Assert.IsTrue(emulator.Signals.CO);
+            Assert.IsTrue(emulator.signals.MI);
+            Assert.IsTrue(emulator.signals.CO);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.Signals.RO);
-            Assert.IsTrue(emulator.Signals.II);
-            Assert.IsTrue(emulator.Signals.CE);
+            Assert.IsTrue(emulator.signals.RO);
+            Assert.IsTrue(emulator.signals.II);
+            Assert.IsTrue(emulator.signals.CE);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step2();
-            Assert.IsTrue(emulator.Signals.IO);
-            Assert.IsTrue(emulator.Signals.MI);
+            Assert.IsTrue(emulator.signals.IO);
+            Assert.IsTrue(emulator.signals.MI);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step3();
-            Assert.IsTrue(emulator.Signals.RO);
-            Assert.IsTrue(emulator.Signals.AI);
+            Assert.IsTrue(emulator.signals.RO);
+            Assert.IsTrue(emulator.signals.AI);
         }
 
         [Test]
@@ -45,26 +45,26 @@ namespace EaterEmulator.Tests.Operations
             Emulator emulator = new Emulator();
             Operation op = new STA(emulator);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.Signals.MI);
-            Assert.IsTrue(emulator.Signals.CO);
+            Assert.IsTrue(emulator.signals.MI);
+            Assert.IsTrue(emulator.signals.CO);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.Signals.RO);
-            Assert.IsTrue(emulator.Signals.II);
-            Assert.IsTrue(emulator.Signals.CE);
+            Assert.IsTrue(emulator.signals.RO);
+            Assert.IsTrue(emulator.signals.II);
+            Assert.IsTrue(emulator.signals.CE);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step2();
-            Assert.IsTrue(emulator.Signals.IO);
-            Assert.IsTrue(emulator.Signals.MI);
+            Assert.IsTrue(emulator.signals.IO);
+            Assert.IsTrue(emulator.signals.MI);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step3();
-            Assert.IsTrue(emulator.Signals.AO);
-            Assert.IsTrue(emulator.Signals.RI);
+            Assert.IsTrue(emulator.signals.AO);
+            Assert.IsTrue(emulator.signals.RI);
         }
 
         [Test]
@@ -73,21 +73,21 @@ namespace EaterEmulator.Tests.Operations
             Emulator emulator = new Emulator();
             Operation op = new OUT(emulator);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.Signals.MI);
-            Assert.IsTrue(emulator.Signals.CO);
+            Assert.IsTrue(emulator.signals.MI);
+            Assert.IsTrue(emulator.signals.CO);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.Signals.RO);
-            Assert.IsTrue(emulator.Signals.II);
-            Assert.IsTrue(emulator.Signals.CE);
+            Assert.IsTrue(emulator.signals.RO);
+            Assert.IsTrue(emulator.signals.II);
+            Assert.IsTrue(emulator.signals.CE);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step2();
-            Assert.IsTrue(emulator.Signals.AO);
-            Assert.IsTrue(emulator.Signals.OI);
+            Assert.IsTrue(emulator.signals.AO);
+            Assert.IsTrue(emulator.signals.OI);
         }
 
         [Test]
@@ -96,20 +96,20 @@ namespace EaterEmulator.Tests.Operations
             Emulator emulator = new Emulator();
             Operation op = new HLT(emulator);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.Signals.MI);
-            Assert.IsTrue(emulator.Signals.CO);
+            Assert.IsTrue(emulator.signals.MI);
+            Assert.IsTrue(emulator.signals.CO);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.Signals.RO);
-            Assert.IsTrue(emulator.Signals.II);
-            Assert.IsTrue(emulator.Signals.CE);
+            Assert.IsTrue(emulator.signals.RO);
+            Assert.IsTrue(emulator.signals.II);
+            Assert.IsTrue(emulator.signals.CE);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step2();
-            Assert.IsTrue(emulator.Signals.HLT);
+            Assert.IsTrue(emulator.signals.HLT);
         }
 
         [Test]
@@ -118,32 +118,32 @@ namespace EaterEmulator.Tests.Operations
             Emulator emulator = new Emulator();
             Operation op = new ADD(emulator);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.Signals.MI);
-            Assert.IsTrue(emulator.Signals.CO);
+            Assert.IsTrue(emulator.signals.MI);
+            Assert.IsTrue(emulator.signals.CO);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.Signals.RO);
-            Assert.IsTrue(emulator.Signals.II);
-            Assert.IsTrue(emulator.Signals.CE);
+            Assert.IsTrue(emulator.signals.RO);
+            Assert.IsTrue(emulator.signals.II);
+            Assert.IsTrue(emulator.signals.CE);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step2();
-            Assert.IsTrue(emulator.Signals.IO);
-            Assert.IsTrue(emulator.Signals.MI);
+            Assert.IsTrue(emulator.signals.IO);
+            Assert.IsTrue(emulator.signals.MI);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step3();
-            Assert.IsTrue(emulator.Signals.RO);
-            Assert.IsTrue(emulator.Signals.BI);
+            Assert.IsTrue(emulator.signals.RO);
+            Assert.IsTrue(emulator.signals.BI);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step4();
-            Assert.IsTrue(emulator.Signals.EO);
-            Assert.IsTrue(emulator.Signals.AI);
-            Assert.IsTrue(emulator.Signals.FI);
+            Assert.IsTrue(emulator.signals.EO);
+            Assert.IsTrue(emulator.signals.AI);
+            Assert.IsTrue(emulator.signals.FI);
         }
 
         [Test]
@@ -153,21 +153,21 @@ namespace EaterEmulator.Tests.Operations
             emulator.Flags.Value = FlagsRegister.CARRY;
             Operation op = new JC(emulator);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.Signals.MI);
-            Assert.IsTrue(emulator.Signals.CO);
+            Assert.IsTrue(emulator.signals.MI);
+            Assert.IsTrue(emulator.signals.CO);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.Signals.RO);
-            Assert.IsTrue(emulator.Signals.II);
-            Assert.IsTrue(emulator.Signals.CE);
+            Assert.IsTrue(emulator.signals.RO);
+            Assert.IsTrue(emulator.signals.II);
+            Assert.IsTrue(emulator.signals.CE);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step2();
-            Assert.IsTrue(emulator.Signals.IO);
-            Assert.IsTrue(emulator.Signals.J);
+            Assert.IsTrue(emulator.signals.IO);
+            Assert.IsTrue(emulator.signals.J);
         }
 
         [Test]
@@ -177,21 +177,21 @@ namespace EaterEmulator.Tests.Operations
             emulator.Flags.Value = 0;
             Operation op = new JC(emulator);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.Signals.MI);
-            Assert.IsTrue(emulator.Signals.CO);
+            Assert.IsTrue(emulator.signals.MI);
+            Assert.IsTrue(emulator.signals.CO);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.Signals.RO);
-            Assert.IsTrue(emulator.Signals.II);
-            Assert.IsTrue(emulator.Signals.CE);
+            Assert.IsTrue(emulator.signals.RO);
+            Assert.IsTrue(emulator.signals.II);
+            Assert.IsTrue(emulator.signals.CE);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step2();
-            Assert.IsFalse(emulator.Signals.IO);
-            Assert.IsFalse(emulator.Signals.J);
+            Assert.IsFalse(emulator.signals.IO);
+            Assert.IsFalse(emulator.signals.J);
         }
 
         [Test]
@@ -201,21 +201,21 @@ namespace EaterEmulator.Tests.Operations
             emulator.Flags.Value = FlagsRegister.CARRY;
             Operation op = new JMP(emulator);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.Signals.MI);
-            Assert.IsTrue(emulator.Signals.CO);
+            Assert.IsTrue(emulator.signals.MI);
+            Assert.IsTrue(emulator.signals.CO);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.Signals.RO);
-            Assert.IsTrue(emulator.Signals.II);
-            Assert.IsTrue(emulator.Signals.CE);
+            Assert.IsTrue(emulator.signals.RO);
+            Assert.IsTrue(emulator.signals.II);
+            Assert.IsTrue(emulator.signals.CE);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step2();
-            Assert.IsTrue(emulator.Signals.IO);
-            Assert.IsTrue(emulator.Signals.J);
+            Assert.IsTrue(emulator.signals.IO);
+            Assert.IsTrue(emulator.signals.J);
         }
 
         [Test]
@@ -225,21 +225,21 @@ namespace EaterEmulator.Tests.Operations
             emulator.Flags.Value = FlagsRegister.ZERO;
             Operation op = new JZ(emulator);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.Signals.MI);
-            Assert.IsTrue(emulator.Signals.CO);
+            Assert.IsTrue(emulator.signals.MI);
+            Assert.IsTrue(emulator.signals.CO);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.Signals.RO);
-            Assert.IsTrue(emulator.Signals.II);
-            Assert.IsTrue(emulator.Signals.CE);
+            Assert.IsTrue(emulator.signals.RO);
+            Assert.IsTrue(emulator.signals.II);
+            Assert.IsTrue(emulator.signals.CE);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step2();
-            Assert.IsTrue(emulator.Signals.IO);
-            Assert.IsTrue(emulator.Signals.J);
+            Assert.IsTrue(emulator.signals.IO);
+            Assert.IsTrue(emulator.signals.J);
         }
 
         [Test]
@@ -249,21 +249,21 @@ namespace EaterEmulator.Tests.Operations
             emulator.Flags.Value = 0;
             Operation op = new JZ(emulator);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.Signals.MI);
-            Assert.IsTrue(emulator.Signals.CO);
+            Assert.IsTrue(emulator.signals.MI);
+            Assert.IsTrue(emulator.signals.CO);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.Signals.RO);
-            Assert.IsTrue(emulator.Signals.II);
-            Assert.IsTrue(emulator.Signals.CE);
+            Assert.IsTrue(emulator.signals.RO);
+            Assert.IsTrue(emulator.signals.II);
+            Assert.IsTrue(emulator.signals.CE);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step2();
-            Assert.IsFalse(emulator.Signals.IO);
-            Assert.IsFalse(emulator.Signals.J);
+            Assert.IsFalse(emulator.signals.IO);
+            Assert.IsFalse(emulator.signals.J);
         }
 
 
@@ -273,21 +273,21 @@ namespace EaterEmulator.Tests.Operations
             Emulator emulator = new Emulator();
             Operation op = new LDI(emulator);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.Signals.MI);
-            Assert.IsTrue(emulator.Signals.CO);
+            Assert.IsTrue(emulator.signals.MI);
+            Assert.IsTrue(emulator.signals.CO);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.Signals.RO);
-            Assert.IsTrue(emulator.Signals.II);
-            Assert.IsTrue(emulator.Signals.CE);
+            Assert.IsTrue(emulator.signals.RO);
+            Assert.IsTrue(emulator.signals.II);
+            Assert.IsTrue(emulator.signals.CE);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step2();
-            Assert.IsTrue(emulator.Signals.IO);
-            Assert.IsTrue(emulator.Signals.AI);
+            Assert.IsTrue(emulator.signals.IO);
+            Assert.IsTrue(emulator.signals.AI);
         }
 
         [Test]
@@ -296,33 +296,33 @@ namespace EaterEmulator.Tests.Operations
             Emulator emulator = new Emulator();
             Operation op = new SUB(emulator);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step0();
-            Assert.IsTrue(emulator.Signals.MI);
-            Assert.IsTrue(emulator.Signals.CO);
+            Assert.IsTrue(emulator.signals.MI);
+            Assert.IsTrue(emulator.signals.CO);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step1();
-            Assert.IsTrue(emulator.Signals.RO);
-            Assert.IsTrue(emulator.Signals.II);
-            Assert.IsTrue(emulator.Signals.CE);
+            Assert.IsTrue(emulator.signals.RO);
+            Assert.IsTrue(emulator.signals.II);
+            Assert.IsTrue(emulator.signals.CE);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step2();
-            Assert.IsTrue(emulator.Signals.IO);
-            Assert.IsTrue(emulator.Signals.MI);
+            Assert.IsTrue(emulator.signals.IO);
+            Assert.IsTrue(emulator.signals.MI);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step3();
-            Assert.IsTrue(emulator.Signals.RO);
-            Assert.IsTrue(emulator.Signals.BI);
+            Assert.IsTrue(emulator.signals.RO);
+            Assert.IsTrue(emulator.signals.BI);
 
-            emulator.Signals.Reset();
+            emulator.signals.Reset();
             op.Step4();
-            Assert.IsTrue(emulator.Signals.EO);
-            Assert.IsTrue(emulator.Signals.AI);
-            Assert.IsTrue(emulator.Signals.SU);
-            Assert.IsTrue(emulator.Signals.FI);
+            Assert.IsTrue(emulator.signals.EO);
+            Assert.IsTrue(emulator.signals.AI);
+            Assert.IsTrue(emulator.signals.SU);
+            Assert.IsTrue(emulator.signals.FI);
         }
 
         [Test]
