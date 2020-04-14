@@ -15,7 +15,7 @@ namespace EaterEmulator.Tests.Operations
         public void TestLDA()
         {
             SignalBus signals = new SignalBus();
-            Operation op = new LDA(null, signals);
+            Operation op = new LDA(null, signals, null);
 
             signals.Reset();
             op.Step0();
@@ -43,7 +43,7 @@ namespace EaterEmulator.Tests.Operations
         public void TestSTA()
         {
             SignalBus signals = new SignalBus();
-            Operation op = new STA(null, signals);
+            Operation op = new STA(null, signals, null);
 
             signals.Reset();
             op.Step0();
@@ -71,7 +71,7 @@ namespace EaterEmulator.Tests.Operations
         public void TestOUT()
         {
             SignalBus signals = new SignalBus();
-            Operation op = new OUT(null, signals);
+            Operation op = new OUT(null, signals, null);
 
             signals.Reset();
             op.Step0();
@@ -94,7 +94,7 @@ namespace EaterEmulator.Tests.Operations
         public void TestHLT()
         {
             SignalBus signals = new SignalBus();
-            Operation op = new HLT(null, signals);
+            Operation op = new HLT(null, signals, null);
 
             signals.Reset();
             op.Step0();
@@ -116,7 +116,7 @@ namespace EaterEmulator.Tests.Operations
         public void TestADD()
         {
             SignalBus signals = new SignalBus();
-            Operation op = new ADD(null, signals);
+            Operation op = new ADD(null, signals, null);
 
             signals.Reset();
             op.Step0();
@@ -149,10 +149,10 @@ namespace EaterEmulator.Tests.Operations
         [Test]
         public void TestJCCarryEnabled()
         {
-            Emulator emulator = new Emulator();
-            SignalBus signals = emulator.signals;
-            emulator.flags.Value = FlagsRegister.CARRY;
-            Operation op = new JC(emulator, signals);
+            SignalBus signals = new SignalBus();
+            FlagsRegister flags = new FlagsRegister(null, signals, null);
+            flags.Value = FlagsRegister.CARRY;
+            Operation op = new JC(null, signals, flags);
 
             signals.Reset();
             op.Step0();
@@ -174,10 +174,10 @@ namespace EaterEmulator.Tests.Operations
         [Test]
         public void TestJCCarryDisabled()
         {
-            Emulator emulator = new Emulator();
-            SignalBus signals = emulator.signals;
-            emulator.flags.Value = 0;
-            Operation op = new JC(emulator, signals);
+            SignalBus signals = new SignalBus();
+            FlagsRegister flags = new FlagsRegister(null, signals, null);
+            flags.Value = 0;
+            Operation op = new JC(null, signals, flags);
 
             signals.Reset();
             op.Step0();
@@ -199,10 +199,10 @@ namespace EaterEmulator.Tests.Operations
         [Test]
         public void TestJMP()
         {
-            Emulator emulator = new Emulator();
-            SignalBus signals = emulator.signals;
-            emulator.flags.Value = FlagsRegister.CARRY;
-            Operation op = new JMP(emulator, signals);
+            SignalBus signals = new SignalBus();
+            FlagsRegister flags = new FlagsRegister(null, signals, null);
+            flags.Value = FlagsRegister.CARRY;
+            Operation op = new JMP(null, signals, null);
 
             signals.Reset();
             op.Step0();
@@ -224,10 +224,11 @@ namespace EaterEmulator.Tests.Operations
         [Test]
         public void TestJZZeroEnabled()
         {
-            Emulator emulator = new Emulator();
-            SignalBus signals = emulator.signals;
-            emulator.flags.Value = FlagsRegister.ZERO;
-            Operation op = new JZ(emulator, signals);
+            SignalBus signals = new SignalBus();
+            FlagBus flagBus = new FlagBus();
+            FlagsRegister flags = new FlagsRegister(null, signals, flagBus);
+            flags.Value = FlagsRegister.ZERO;
+            Operation op = new JZ(null, signals, flags);
 
             signals.Reset();
             op.Step0();
@@ -249,10 +250,10 @@ namespace EaterEmulator.Tests.Operations
         [Test]
         public void TestJZZeroDisabled()
         {
-            Emulator emulator = new Emulator();
-            SignalBus signals = emulator.signals;
-            emulator.flags.Value = 0;
-            Operation op = new JZ(emulator, signals);
+            SignalBus signals = new SignalBus();
+            FlagsRegister flags = new FlagsRegister(null, signals, null);
+            flags.Value = 0;
+            Operation op = new JZ(null, signals, flags);
 
             signals.Reset();
             op.Step0();
@@ -276,7 +277,7 @@ namespace EaterEmulator.Tests.Operations
         public void TestLDI()
         {
             SignalBus signals = new SignalBus();
-            Operation op = new LDI(null, signals);
+            Operation op = new LDI(null, signals, null);
 
             signals.Reset();
             op.Step0();
@@ -299,7 +300,7 @@ namespace EaterEmulator.Tests.Operations
         public void TestSUB()
         {
             SignalBus signals = new SignalBus();
-            Operation op = new SUB(null, signals);
+            Operation op = new SUB(null, signals, null);
 
             signals.Reset();
             op.Step0();

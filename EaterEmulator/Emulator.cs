@@ -10,7 +10,7 @@ namespace EaterEmulator
     {
         private readonly DataBus bus = new DataBus();
 
-        private readonly FlagBus flagBus = new FlagBus();
+        public readonly FlagBus flagBus = new FlagBus();
 
         public readonly SignalBus signals = new SignalBus();
 
@@ -51,22 +51,22 @@ namespace EaterEmulator
             this.memoryAddress = new MemoryAddressRegister(bus, signals);
             this.RAM = new Memory(this.bus, this.signals, this.memoryAddress);
 
-            operations.Add(NOP.OP_CODE, new NOP(this, signals));
-            operations.Add(LDA.OP_CODE, new LDA(this, signals));
-            operations.Add(ADD.OP_CODE, new ADD(this, signals));
-            operations.Add(SUB.OP_CODE, new SUB(this, signals));
-            operations.Add(STA.OP_CODE, new STA(this, signals));
-            operations.Add(LDI.OP_CODE, new LDI(this, signals));
-            operations.Add(JMP.OP_CODE, new JMP(this, signals));
-            operations.Add(JC.OP_CODE, new JC(this, signals));
-            operations.Add(JZ.OP_CODE, new JZ(this, signals));
-            operations.Add(0b10010000, new NOP(this, signals));
-            operations.Add(0b10100000, new NOP(this, signals));
-            operations.Add(0b10110000, new NOP(this, signals));
-            operations.Add(0b11000000, new NOP(this, signals));
-            operations.Add(0b11010000, new NOP(this, signals));
-            operations.Add(OUT.OP_CODE, new OUT(this, signals));
-            operations.Add(HLT.OP_CODE, new HLT(this, signals));
+            operations.Add(NOP.OP_CODE, new NOP(this, signals, flags));
+            operations.Add(LDA.OP_CODE, new LDA(this, signals, flags));
+            operations.Add(ADD.OP_CODE, new ADD(this, signals, flags));
+            operations.Add(SUB.OP_CODE, new SUB(this, signals, flags));
+            operations.Add(STA.OP_CODE, new STA(this, signals, flags));
+            operations.Add(LDI.OP_CODE, new LDI(this, signals, flags));
+            operations.Add(JMP.OP_CODE, new JMP(this, signals, flags));
+            operations.Add(JC.OP_CODE, new JC(this, signals, flags));
+            operations.Add(JZ.OP_CODE, new JZ(this, signals, flags));
+            operations.Add(0b10010000, new NOP(this, signals, flags));
+            operations.Add(0b10100000, new NOP(this, signals, flags));
+            operations.Add(0b10110000, new NOP(this, signals, flags));
+            operations.Add(0b11000000, new NOP(this, signals, flags));
+            operations.Add(0b11010000, new NOP(this, signals, flags));
+            operations.Add(OUT.OP_CODE, new OUT(this, signals, flags));
+            operations.Add(HLT.OP_CODE, new HLT(this, signals, flags));
         }
 
         public void Clk()

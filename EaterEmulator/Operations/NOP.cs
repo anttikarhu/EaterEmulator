@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EaterEmulator.Registers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,7 +9,7 @@ namespace EaterEmulator.Operations
     {
         public const byte OP_CODE = 0b00000000;
 
-        public NOP(Emulator emulator, SignalBus signals) : base(emulator, signals)
+        public NOP(Emulator emulator, SignalBus signals, FlagsRegister flags) : base(emulator, signals, flags)
         {
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EaterEmulator.Registers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,14 +7,17 @@ namespace EaterEmulator.Operations
 {
     public abstract class Operation
     {
-        protected Emulator emulator;
+        private Emulator emulator;
 
         protected SignalBus signals;
 
-        public Operation(Emulator emulator, SignalBus signals)
+        protected FlagsRegister flags;
+
+        public Operation(Emulator emulator, SignalBus signals, FlagsRegister flags)
         {
             this.emulator = emulator;
             this.signals = signals;
+            this.flags = flags;
         }
 
         public void Clk() {

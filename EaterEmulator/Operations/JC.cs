@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EaterEmulator.Registers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,13 +9,13 @@ namespace EaterEmulator.Operations
     {
         public const byte OP_CODE = 0b01110000;
 
-        public JC(Emulator emulator, SignalBus signals) : base(emulator, signals)
+        public JC(Emulator emulator, SignalBus signals, FlagsRegister flags) : base(emulator, signals, flags)
         {
         }
 
         public override void Step2()
         {
-            if (emulator.flags.Carry)
+            if (flags.Carry)
             {
                 signals.IO = true;
                 signals.J = true;
