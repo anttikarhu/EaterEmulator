@@ -114,7 +114,7 @@ namespace EaterEmulator
             }
         }
 
-        public void ClkX5()
+        public void Step()
         {
             Clk();
             Clk();
