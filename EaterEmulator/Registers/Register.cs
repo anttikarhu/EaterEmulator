@@ -18,6 +18,8 @@ namespace EaterEmulator.Registers
 
         public virtual byte Value { get; set; }
 
-        public virtual void Clk() { }
+        public virtual void ReadFromBus() { }
+
+        public virtual void WriteToBus() { }
     }
 }

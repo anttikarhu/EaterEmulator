@@ -16,7 +16,7 @@ namespace EaterEmulator.Tests
 
             signals.CE = true;
 
-            programCounter.Clk();
+            programCounter.ReadFromBus();
 
             Assert.AreEqual(1, programCounter.Value);
         }
@@ -30,7 +30,7 @@ namespace EaterEmulator.Tests
             programCounter.Value = 15;
             signals.CE = true;
 
-            programCounter.Clk();
+            programCounter.ReadFromBus();
 
             Assert.AreEqual(0, programCounter.Value);
         }
@@ -45,7 +45,7 @@ namespace EaterEmulator.Tests
             programCounter.Value = 15;
             signals.CO = true;
 
-            programCounter.Clk();
+            programCounter.WriteToBus();
 
             Assert.AreEqual(15, bus.Value);
         }

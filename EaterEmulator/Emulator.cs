@@ -91,15 +91,25 @@ namespace EaterEmulator
                 InstructionCounter = 0;
             }
        
-            RAM.Clk();
-            Instruction.Clk();
-            ProgramCounter.Clk();
-            MemoryAddress.Clk();
-            Sum.Clk();
-            A.Clk();
-            B.Clk();
-            Flags.Clk();
-            Output.Clk();
+            RAM.WriteToBus();
+            Instruction.WriteToBus();
+            ProgramCounter.WriteToBus();
+            MemoryAddress.WriteToBus();
+            Sum.WriteToBus();
+            A.WriteToBus();
+            B.WriteToBus();
+            Flags.WriteToBus();
+            Output.WriteToBus();
+
+            RAM.ReadFromBus();
+            Instruction.ReadFromBus();
+            ProgramCounter.ReadFromBus();
+            MemoryAddress.ReadFromBus();
+            Sum.ReadFromBus();
+            A.ReadFromBus();
+            B.ReadFromBus();
+            Flags.ReadFromBus();
+            Output.ReadFromBus();
         }
 
         public void ClkX5()

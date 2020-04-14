@@ -21,7 +21,7 @@ namespace EaterEmulator.Tests
             memoryAddress.Value = 0xF;
             signals.RI = true;
 
-            ram.Clk();
+            ram.ReadFromBus();
 
             Assert.AreEqual(255, ram.Get(0xF));
         }
@@ -39,7 +39,7 @@ namespace EaterEmulator.Tests
             memoryAddress.Value = 0xF;
             signals.RO = true;
 
-            ram.Clk();
+            ram.WriteToBus();
 
             Assert.AreEqual(255, bus.Value);
         }

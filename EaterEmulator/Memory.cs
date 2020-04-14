@@ -32,15 +32,19 @@ namespace EaterEmulator
             data[address] = value;
         }
 
-        public void Clk()
+        public void ReadFromBus()
+        {
+            if (signals.RI)
+            {
+                data[memoryAddressRegister.Value] = bus.Value;
+            }
+        }
+
+        public void WriteToBus()
         {
             if (signals.RO)
             {
                 bus.Value = data[memoryAddressRegister.Value];
-            }
-            else if (signals.RI)
-            {
-                data[memoryAddressRegister.Value] = bus.Value;
             }
         }
     }

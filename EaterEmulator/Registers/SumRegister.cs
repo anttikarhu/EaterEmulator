@@ -19,7 +19,7 @@ namespace EaterEmulator.Registers
             this.flagBus = flagBus;
         }
 
-        public override void Clk()
+        public override void WriteToBus()
         {
             if (Signals.SU)
             {

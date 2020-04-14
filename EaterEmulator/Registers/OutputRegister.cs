@@ -11,7 +11,7 @@ namespace EaterEmulator.Registers
 
         }
 
-        public override void Clk()
+        public override void ReadFromBus()
         {
             if (Signals.OI)
             {

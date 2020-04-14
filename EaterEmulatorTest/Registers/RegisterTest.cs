@@ -19,7 +19,7 @@ namespace EaterEmulator.Registers.Tests
             bus.Value = 255;
             signals.AI = true;
 
-            a.Clk();
+            a.ReadFromBus();
             Assert.AreEqual(255, a.Value);
         }
 
@@ -33,7 +33,7 @@ namespace EaterEmulator.Registers.Tests
             a.Value = 255;
             signals.AO = true;
 
-            a.Clk();
+            a.WriteToBus();
             Assert.AreEqual(255, bus.Value);
         }
 
@@ -47,7 +47,7 @@ namespace EaterEmulator.Registers.Tests
             bus.Value = 255;
             signals.BI = true;
 
-            b.Clk();
+            b.ReadFromBus();
             Assert.AreEqual(255, b.Value);
         }
 
@@ -66,7 +66,7 @@ namespace EaterEmulator.Registers.Tests
             b.Value = 100;
 
             signals.EO = true;
-            sum.Clk();
+            sum.WriteToBus();
 
             Assert.AreEqual(44, bus.Value);
             Assert.IsTrue(flagBus.Carry);
@@ -88,7 +88,7 @@ namespace EaterEmulator.Registers.Tests
 
             signals.EO = true;
             signals.SU = true;
-            sum.Clk();
+            sum.WriteToBus();
 
             Assert.AreEqual(0, bus.Value);
             Assert.IsTrue(flagBus.Zero);
@@ -104,7 +104,7 @@ namespace EaterEmulator.Registers.Tests
             bus.Value = 255;
             signals.OI = true;
 
-            output.Clk();
+            output.ReadFromBus();
             Assert.AreEqual(255, output.Value);
         }
 
@@ -118,7 +118,7 @@ namespace EaterEmulator.Registers.Tests
             bus.Value = STA.OP_CODE + 15;
             signals.II = true;
 
-            instruction.Clk();
+            instruction.ReadFromBus();
             Assert.AreEqual(STA.OP_CODE + 15, instruction.Value);
         }
 
@@ -132,7 +132,7 @@ namespace EaterEmulator.Registers.Tests
             instruction.Value = STA.OP_CODE + 15;
             signals.IO = true;
 
-            instruction.Clk();
+            instruction.WriteToBus();
             Assert.AreEqual(15, bus.Value);
         }
 
@@ -148,7 +148,7 @@ namespace EaterEmulator.Registers.Tests
             flagBus.Zero = true;
             signals.FI = true;
 
-            flags.Clk();
+            flags.ReadFromBus();
             Assert.AreEqual(FlagsRegister.CARRY + FlagsRegister.ZERO, flags.Value);
         }
 
@@ -162,7 +162,7 @@ namespace EaterEmulator.Registers.Tests
             bus.Value = 0xF;
             signals.MI = true;
 
-            memoryAddress.Clk();
+            memoryAddress.ReadFromBus();
             Assert.AreEqual(0xF, memoryAddress.Value);
         }
     }

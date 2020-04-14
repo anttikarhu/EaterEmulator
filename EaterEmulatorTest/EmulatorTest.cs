@@ -79,7 +79,7 @@ namespace EaterEmulator.Tests
             flagBus.Zero = true;
             signals.FI = true;
 
-            flagsRegister.Clk();
+            flagsRegister.ReadFromBus();
 
             Assert.AreEqual(3, flagsRegister.Value);
         }
@@ -204,7 +204,7 @@ namespace EaterEmulator.Tests
         }
 
         [Test]
-        public void JumpsWhenCarryEnabled()
+        public void JumpsWithJCWhenCarryEnabled()
         {
             Emulator emulator = new Emulator();
             emulator.RAM.Store(0x0, LDA.OP_CODE + 0xE);
@@ -221,7 +221,24 @@ namespace EaterEmulator.Tests
         }
 
         [Test]
-        public void JumpsWhenZeroEnabled()
+        public void DoesNotJumpWithJCWhenCarryDisabled()
+        {
+            Emulator emulator = new Emulator();
+            emulator.RAM.Store(0x0, LDA.OP_CODE + 0xE);
+            emulator.RAM.Store(0x1, ADD.OP_CODE + 0xF);
+            emulator.RAM.Store(0x2, JC.OP_CODE + 0x4);
+            emulator.RAM.Store(0xE, 0);
+            emulator.RAM.Store(0xF, 1);
+
+            emulator.ClkX5();
+            emulator.ClkX5();
+            emulator.ClkX5();
+
+            Assert.AreEqual(0x3, emulator.ProgramCounter.Value);
+        }
+
+        [Test]
+        public void JumpsWithJZWhenZeroEnabled()
         {
             Emulator emulator = new Emulator();
             emulator.RAM.Store(0x0, LDA.OP_CODE + 0xE);
@@ -235,6 +252,46 @@ namespace EaterEmulator.Tests
             emulator.ClkX5();
 
             Assert.AreEqual(0x4, emulator.ProgramCounter.Value);
+        }
+
+        [Test]
+        public void DoesNotJumpWithJZWhenZeroDisabled()
+        {
+            Emulator emulator = new Emulator();
+            emulator.RAM.Store(0x0, LDA.OP_CODE + 0xE);
+            emulator.RAM.Store(0x1, ADD.OP_CODE + 0xF);
+            emulator.RAM.Store(0x2, JZ.OP_CODE + 0x4);
+            emulator.RAM.Store(0xE, 0);
+            emulator.RAM.Store(0xF, 1);
+
+            emulator.ClkX5();
+            emulator.ClkX5();
+            emulator.ClkX5();
+
+            Assert.AreEqual(0x3, emulator.ProgramCounter.Value);
+        }
+
+        [Test]
+        public void JumpsWithJMP()
+        {
+            Emulator emulator = new Emulator();
+            emulator.RAM.Store(0x0, JMP.OP_CODE + 0x4);
+
+            emulator.ClkX5();
+
+            Assert.AreEqual(0x4, emulator.ProgramCounter.Value);
+        }
+
+        [Test]
+        public void LoadsValueFromRam()
+        {
+            Emulator emulator = new Emulator();
+            emulator.RAM.Store(0x0, LDA.OP_CODE + 0xF);
+            emulator.RAM.Store(0xF, 255);
+
+            emulator.ClkX5();
+
+            Assert.AreEqual(255, emulator.A.Value);
         }
     }
 }

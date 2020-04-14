@@ -18,7 +18,7 @@ namespace EaterEmulator.Registers
             this.signals = signals;
         }
 
-        public void Clk()
+        public void ReadFromBus()
         {
             if (signals.CE)
             {
@@ -28,13 +28,17 @@ namespace EaterEmulator.Registers
                     Value = 0;
                 }
             }
-            else if (signals.CO)
-            {
-                bus.Value = Value;
-            }
             else if (signals.J)
             {
                 Value = bus.Value;
+            }
+        }
+
+        public void WriteToBus()
+        {
+            if (signals.CO)
+            {
+                bus.Value = Value;
             }
         }
     }

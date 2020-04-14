@@ -19,7 +19,7 @@ namespace EaterEmulator.Registers
 
         public const byte CARRY = 2;
 
-        public override void Clk()
+        public override void ReadFromBus()
         {
             if (Signals.FI)
             {

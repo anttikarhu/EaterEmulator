@@ -11,13 +11,17 @@ namespace EaterEmulator.Registers
 
         }
 
-        public override void Clk()
+        public override void ReadFromBus()
         {
             if (Signals.II)
             {
                 Value = Bus.Value;
             }
-            else if (Signals.IO)
+        }
+
+        public override void WriteToBus()
+        {
+            if (Signals.IO)
             {
                 Bus.Value = (byte)(Value & 0b00001111);
             }
