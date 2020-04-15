@@ -1,7 +1,4 @@
 ﻿using EaterEmulator.Registers;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EaterEmulator.Operations
 {
@@ -10,7 +7,7 @@ namespace EaterEmulator.Operations
         public const byte OP_CODE = 0b11100000;
 
         public OUT(InstructionCounter instructionCounter, SignalBus signals, FlagsRegister flags) : base(instructionCounter, signals, flags)
-        { 
+        {
         }
 
         public override void Step2()

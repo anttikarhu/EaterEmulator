@@ -1,7 +1,4 @@
 ﻿using EaterEmulator.Registers;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EaterEmulator.Operations
 {
@@ -20,7 +17,8 @@ namespace EaterEmulator.Operations
             this.flags = flags;
         }
 
-        public void Clk() {
+        public void Clk()
+        {
             switch (instructionCounter.Value)
             {
                 case 0:
@@ -41,12 +39,14 @@ namespace EaterEmulator.Operations
             }
         }
 
-        public virtual void Step0() {
+        public void Step0()
+        {
             signals.MI = true;
             signals.CO = true;
         }
 
-        public virtual void Step1() {
+        public void Step1()
+        {
             signals.RO = true;
             signals.II = true;
             signals.CE = true;

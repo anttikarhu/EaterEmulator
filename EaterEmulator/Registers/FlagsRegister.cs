@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EaterEmulator.Registers
+﻿namespace EaterEmulator.Registers
 {
     public class FlagsRegister : Register
     {
@@ -24,8 +20,8 @@ namespace EaterEmulator.Registers
             if (Signals.FI)
             {
                 Value = 0;
-                Value += flagBus.Zero ? ZERO : (byte) 0;
-                Value += flagBus.Carry ? CARRY : (byte) 0;
+                Value += flagBus.Zero ? ZERO : (byte)0;
+                Value += flagBus.Carry ? CARRY : (byte)0;
             }
         }
 

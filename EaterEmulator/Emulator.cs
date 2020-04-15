@@ -1,8 +1,6 @@
 ﻿using EaterEmulator.Operations;
 using EaterEmulator.Registers;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace EaterEmulator
 {
@@ -10,9 +8,9 @@ namespace EaterEmulator
     {
         private readonly DataBus bus = new DataBus();
 
-        public readonly FlagBus flagBus = new FlagBus();
+        private readonly FlagBus flagBus = new FlagBus();
 
-        public readonly SignalBus signals = new SignalBus();
+        private readonly SignalBus signals = new SignalBus();
 
         public readonly Register A;
 
@@ -22,7 +20,7 @@ namespace EaterEmulator
 
         public readonly Register instruction;
 
-        public readonly FlagsRegister flags;
+        private readonly FlagsRegister flags;
 
         public readonly Register output;
 
@@ -30,9 +28,9 @@ namespace EaterEmulator
 
         public readonly Memory RAM;
 
-        public ProgramCounter ProgramCounter { get; private set; }
+        public readonly ProgramCounter programCounter;
 
-        private InstructionCounter instructionCounter = new InstructionCounter();
+        private readonly InstructionCounter instructionCounter = new InstructionCounter();
 
         public bool IsHalted { get; set; }
 
@@ -40,7 +38,7 @@ namespace EaterEmulator
 
         public Emulator()
         {
-            this.ProgramCounter = new ProgramCounter(this.bus, this.signals);
+            this.programCounter = new ProgramCounter(this.bus, this.signals);
 
             this.A = new ARegister(bus, signals);
             this.B = new BRegister(bus, signals);
@@ -82,10 +80,10 @@ namespace EaterEmulator
 
             operation.Clk();
             instructionCounter.Clk();
-       
+
             RAM.WriteToBus();
             instruction.WriteToBus();
-            ProgramCounter.WriteToBus();
+            programCounter.WriteToBus();
             memoryAddress.WriteToBus();
             sum.WriteToBus();
             A.WriteToBus();
@@ -95,7 +93,7 @@ namespace EaterEmulator
 
             RAM.ReadFromBus();
             instruction.ReadFromBus();
-            ProgramCounter.ReadFromBus();
+            programCounter.ReadFromBus();
             memoryAddress.ReadFromBus();
             sum.ReadFromBus();
             A.ReadFromBus();
@@ -120,7 +118,7 @@ namespace EaterEmulator
 
         public Operation GetOperation(byte instructionRegisterValue)
         {
-            byte opCode = (byte) (instructionRegisterValue & 0b11110000);
+            byte opCode = (byte)(instructionRegisterValue & 0b11110000);
             return operations[opCode];
         }
     }

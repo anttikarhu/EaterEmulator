@@ -1,10 +1,8 @@
-﻿using EaterEmulator;
-using EaterEmulator.Operations;
+﻿using EaterEmulator.Operations;
 using EaterEmulator.Registers;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace EaterEmulator.Tests
 {
@@ -20,7 +18,7 @@ namespace EaterEmulator.Tests
             emulator.Clk();
 
             Assert.AreEqual(LDA.OP_CODE, emulator.instruction.Value);
-            Assert.AreEqual(1, emulator.ProgramCounter.Value);
+            Assert.AreEqual(1, emulator.programCounter.Value);
         }
 
         [Test]
@@ -37,7 +35,7 @@ namespace EaterEmulator.Tests
             emulator.Step();
 
             Assert.IsTrue(emulator.IsHalted);
-            Assert.AreEqual(3, emulator.ProgramCounter.Value);
+            Assert.AreEqual(3, emulator.programCounter.Value);
             Assert.AreEqual(62, emulator.output.Value);
         }
 
@@ -45,12 +43,12 @@ namespace EaterEmulator.Tests
         public void DoesNotRunWhenHalted()
         {
             Emulator emulator = new Emulator();
-            emulator.ProgramCounter.Value = 0;
+            emulator.programCounter.Value = 0;
             emulator.IsHalted = true;
 
             emulator.Step();
 
-            Assert.AreEqual(0, emulator.ProgramCounter.Value);
+            Assert.AreEqual(0, emulator.programCounter.Value);
         }
 
         [Test]
@@ -120,13 +118,13 @@ namespace EaterEmulator.Tests
         public void ProgramCounterWraps()
         {
             Emulator emulator = new Emulator();
-            
-            for(int i = 0; i < 17; i++)
+
+            for (int i = 0; i < 17; i++)
             {
                 emulator.Step();
             }
 
-            Assert.AreEqual(1, emulator.ProgramCounter.Value);
+            Assert.AreEqual(1, emulator.programCounter.Value);
         }
 
         [Test]
@@ -140,7 +138,7 @@ namespace EaterEmulator.Tests
             emulator.RAM.Store(0x4, STA.OP_CODE + 0xE);
             emulator.RAM.Store(0x5, OUT.OP_CODE);
             emulator.RAM.Store(0x6, ADD.OP_CODE + 0xD);
-            emulator.RAM.Store(0x7, JC.OP_CODE  + 0x0);
+            emulator.RAM.Store(0x7, JC.OP_CODE + 0x0);
             emulator.RAM.Store(0x8, STA.OP_CODE + 0xF);
             emulator.RAM.Store(0x9, LDA.OP_CODE + 0xE);
             emulator.RAM.Store(0xA, STA.OP_CODE + 0xD);
@@ -152,7 +150,7 @@ namespace EaterEmulator.Tests
 
             List<Byte> values = new List<byte>();
 
-            for(int i = 0; i < 114; i++)
+            for (int i = 0; i < 114; i++)
             {
                 emulator.Step();
 
@@ -217,7 +215,7 @@ namespace EaterEmulator.Tests
             emulator.Step();
             emulator.Step();
 
-            Assert.AreEqual(0x4, emulator.ProgramCounter.Value);
+            Assert.AreEqual(0x4, emulator.programCounter.Value);
         }
 
         [Test]
@@ -234,7 +232,7 @@ namespace EaterEmulator.Tests
             emulator.Step();
             emulator.Step();
 
-            Assert.AreEqual(0x3, emulator.ProgramCounter.Value);
+            Assert.AreEqual(0x3, emulator.programCounter.Value);
         }
 
         [Test]
@@ -251,7 +249,7 @@ namespace EaterEmulator.Tests
             emulator.Step();
             emulator.Step();
 
-            Assert.AreEqual(0x4, emulator.ProgramCounter.Value);
+            Assert.AreEqual(0x4, emulator.programCounter.Value);
         }
 
         [Test]
@@ -268,7 +266,7 @@ namespace EaterEmulator.Tests
             emulator.Step();
             emulator.Step();
 
-            Assert.AreEqual(0x3, emulator.ProgramCounter.Value);
+            Assert.AreEqual(0x3, emulator.programCounter.Value);
         }
 
         [Test]
@@ -279,7 +277,7 @@ namespace EaterEmulator.Tests
 
             emulator.Step();
 
-            Assert.AreEqual(0x4, emulator.ProgramCounter.Value);
+            Assert.AreEqual(0x4, emulator.programCounter.Value);
         }
 
         [Test]

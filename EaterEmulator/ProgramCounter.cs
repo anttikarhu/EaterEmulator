@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EaterEmulator.Registers
+﻿namespace EaterEmulator.Registers
 {
     public class ProgramCounter
     {
@@ -24,7 +20,8 @@ namespace EaterEmulator.Registers
             {
                 Value++;
 
-                if (Value >= 16) {
+                if (Value >= 16)
+                {
                     Value = 0;
                 }
             }

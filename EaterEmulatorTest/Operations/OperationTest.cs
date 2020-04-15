@@ -1,8 +1,7 @@
-using EaterEmulator.Operations;
 using EaterEmulator.Registers;
 using NUnit.Framework;
 
-namespace EaterEmulator.Tests.Operations
+namespace EaterEmulator.Operations.Tests
 {
     public class OperationTest
     {
