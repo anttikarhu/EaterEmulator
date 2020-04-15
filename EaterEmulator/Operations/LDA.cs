@@ -9,7 +9,7 @@ namespace EaterEmulator.Operations
     {
         public const byte OP_CODE = 0b00010000;
 
-        public LDA(Emulator emulator, SignalBus signals, FlagsRegister flags) : base(emulator, signals, flags)
+        public LDA(InstructionCounter instructionCounter, SignalBus signals, FlagsRegister flags) : base(instructionCounter, signals, flags)
         { 
         }
 

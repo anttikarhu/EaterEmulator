@@ -7,21 +7,21 @@ namespace EaterEmulator.Operations
 {
     public abstract class Operation
     {
-        private Emulator emulator;
+        private InstructionCounter instructionCounter;
 
         protected SignalBus signals;
 
         protected FlagsRegister flags;
 
-        public Operation(Emulator emulator, SignalBus signals, FlagsRegister flags)
+        public Operation(InstructionCounter instructionCounter, SignalBus signals, FlagsRegister flags)
         {
-            this.emulator = emulator;
+            this.instructionCounter = instructionCounter;
             this.signals = signals;
             this.flags = flags;
         }
 
         public void Clk() {
-            switch (emulator.InstructionCounter)
+            switch (instructionCounter.Value)
             {
                 case 0:
                     Step0();

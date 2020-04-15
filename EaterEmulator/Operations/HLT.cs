@@ -9,7 +9,7 @@ namespace EaterEmulator.Operations
     {
         public const byte OP_CODE = 0b11110000;
 
-        public HLT(Emulator emulator, SignalBus signals, FlagsRegister flags) : base(emulator, signals, flags)
+        public HLT(InstructionCounter instructionCounter, SignalBus signals, FlagsRegister flags) : base(instructionCounter, signals, flags)
         {
 
         }

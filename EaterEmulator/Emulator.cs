@@ -32,7 +32,7 @@ namespace EaterEmulator
 
         public ProgramCounter ProgramCounter { get; private set; }
 
-        public byte InstructionCounter { get; private set; }
+        private InstructionCounter instructionCounter = new InstructionCounter();
 
         public bool IsHalted { get; set; }
 
@@ -51,22 +51,22 @@ namespace EaterEmulator
             this.memoryAddress = new MemoryAddressRegister(bus, signals);
             this.RAM = new Memory(this.bus, this.signals, this.memoryAddress);
 
-            operations.Add(NOP.OP_CODE, new NOP(this, signals, flags));
-            operations.Add(LDA.OP_CODE, new LDA(this, signals, flags));
-            operations.Add(ADD.OP_CODE, new ADD(this, signals, flags));
-            operations.Add(SUB.OP_CODE, new SUB(this, signals, flags));
-            operations.Add(STA.OP_CODE, new STA(this, signals, flags));
-            operations.Add(LDI.OP_CODE, new LDI(this, signals, flags));
-            operations.Add(JMP.OP_CODE, new JMP(this, signals, flags));
-            operations.Add(JC.OP_CODE, new JC(this, signals, flags));
-            operations.Add(JZ.OP_CODE, new JZ(this, signals, flags));
-            operations.Add(0b10010000, new NOP(this, signals, flags));
-            operations.Add(0b10100000, new NOP(this, signals, flags));
-            operations.Add(0b10110000, new NOP(this, signals, flags));
-            operations.Add(0b11000000, new NOP(this, signals, flags));
-            operations.Add(0b11010000, new NOP(this, signals, flags));
-            operations.Add(OUT.OP_CODE, new OUT(this, signals, flags));
-            operations.Add(HLT.OP_CODE, new HLT(this, signals, flags));
+            operations.Add(NOP.OP_CODE, new NOP(instructionCounter, signals, flags));
+            operations.Add(LDA.OP_CODE, new LDA(instructionCounter, signals, flags));
+            operations.Add(ADD.OP_CODE, new ADD(instructionCounter, signals, flags));
+            operations.Add(SUB.OP_CODE, new SUB(instructionCounter, signals, flags));
+            operations.Add(STA.OP_CODE, new STA(instructionCounter, signals, flags));
+            operations.Add(LDI.OP_CODE, new LDI(instructionCounter, signals, flags));
+            operations.Add(JMP.OP_CODE, new JMP(instructionCounter, signals, flags));
+            operations.Add(JC.OP_CODE, new JC(instructionCounter, signals, flags));
+            operations.Add(JZ.OP_CODE, new JZ(instructionCounter, signals, flags));
+            operations.Add(0b10010000, new NOP(instructionCounter, signals, flags));
+            operations.Add(0b10100000, new NOP(instructionCounter, signals, flags));
+            operations.Add(0b10110000, new NOP(instructionCounter, signals, flags));
+            operations.Add(0b11000000, new NOP(instructionCounter, signals, flags));
+            operations.Add(0b11010000, new NOP(instructionCounter, signals, flags));
+            operations.Add(OUT.OP_CODE, new OUT(instructionCounter, signals, flags));
+            operations.Add(HLT.OP_CODE, new HLT(instructionCounter, signals, flags));
         }
 
         public void Clk()
@@ -81,12 +81,7 @@ namespace EaterEmulator
             Operation operation = GetOperation(instruction.Value);
 
             operation.Clk();
-
-            InstructionCounter++;
-            if (InstructionCounter == 5)
-            {
-                InstructionCounter = 0;
-            }
+            instructionCounter.Clk();
        
             RAM.WriteToBus();
             instruction.WriteToBus();

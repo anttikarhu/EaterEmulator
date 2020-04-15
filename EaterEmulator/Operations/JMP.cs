@@ -9,7 +9,7 @@ namespace EaterEmulator.Operations
     {
         public const byte OP_CODE = 0b01100000;
 
-        public JMP(Emulator emulator, SignalBus signals, FlagsRegister flags) : base(emulator, signals, flags)
+        public JMP(InstructionCounter instructionCounter, SignalBus signals, FlagsRegister flags) : base(instructionCounter, signals, flags)
         {
         }
 
