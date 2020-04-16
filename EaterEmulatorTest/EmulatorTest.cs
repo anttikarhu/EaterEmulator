@@ -17,8 +17,8 @@ namespace EaterEmulator.Tests
             emulator.Clk();
             emulator.Clk();
 
-            Assert.AreEqual(LDA.OP_CODE, emulator.instruction.Value);
-            Assert.AreEqual(1, emulator.programCounter.Value);
+            Assert.AreEqual(LDA.OP_CODE, emulator.Instruction.Value);
+            Assert.AreEqual(1, emulator.ProgramCounter.Value);
         }
 
         [Test]
@@ -35,7 +35,7 @@ namespace EaterEmulator.Tests
             emulator.Step();
 
             Assert.IsTrue(emulator.Clock.IsHalted);
-            Assert.AreEqual(3, emulator.programCounter.Value);
+            Assert.AreEqual(3, emulator.ProgramCounter.Value);
             Assert.AreEqual(62, emulator.Output.Value);
         }
 
@@ -43,12 +43,12 @@ namespace EaterEmulator.Tests
         public void DoesNotRunWhenHalted()
         {
             Emulator emulator = new Emulator();
-            emulator.programCounter.Value = 0;
+            emulator.ProgramCounter.Value = 0;
             emulator.Clock.IsHalted = true;
 
             emulator.Step();
 
-            Assert.AreEqual(0, emulator.programCounter.Value);
+            Assert.AreEqual(0, emulator.ProgramCounter.Value);
         }
 
         [Test]
@@ -124,7 +124,7 @@ namespace EaterEmulator.Tests
                 emulator.Step();
             }
 
-            Assert.AreEqual(1, emulator.programCounter.Value);
+            Assert.AreEqual(1, emulator.ProgramCounter.Value);
         }
 
         [Test]
@@ -154,7 +154,7 @@ namespace EaterEmulator.Tests
             {
                 emulator.Step();
 
-                if ((byte)(emulator.instruction.Value & 0b11110000) == OUT.OP_CODE)
+                if ((byte)(emulator.Instruction.Value & 0b11110000) == OUT.OP_CODE)
                 {
                     values.Add(emulator.Output.Value);
                 }
@@ -215,7 +215,7 @@ namespace EaterEmulator.Tests
             emulator.Step();
             emulator.Step();
 
-            Assert.AreEqual(0x4, emulator.programCounter.Value);
+            Assert.AreEqual(0x4, emulator.ProgramCounter.Value);
         }
 
         [Test]
@@ -232,7 +232,7 @@ namespace EaterEmulator.Tests
             emulator.Step();
             emulator.Step();
 
-            Assert.AreEqual(0x3, emulator.programCounter.Value);
+            Assert.AreEqual(0x3, emulator.ProgramCounter.Value);
         }
 
         [Test]
@@ -249,7 +249,7 @@ namespace EaterEmulator.Tests
             emulator.Step();
             emulator.Step();
 
-            Assert.AreEqual(0x4, emulator.programCounter.Value);
+            Assert.AreEqual(0x4, emulator.ProgramCounter.Value);
         }
 
         [Test]
@@ -266,7 +266,7 @@ namespace EaterEmulator.Tests
             emulator.Step();
             emulator.Step();
 
-            Assert.AreEqual(0x3, emulator.programCounter.Value);
+            Assert.AreEqual(0x3, emulator.ProgramCounter.Value);
         }
 
         [Test]
@@ -277,7 +277,7 @@ namespace EaterEmulator.Tests
 
             emulator.Step();
 
-            Assert.AreEqual(0x4, emulator.programCounter.Value);
+            Assert.AreEqual(0x4, emulator.ProgramCounter.Value);
         }
 
         [Test]

@@ -9,8 +9,14 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button x:Name="startButton" Content="Start" HorizontalAlignment="Left" Margin="45,52,0,0" VerticalAlignment="Top" Click="StartButton_Click"/>
-        <Ellipse x:Name="clockPulseLight" HorizontalAlignment="Left" Height="30" Margin="154,47,0,0" VerticalAlignment="Top" Width="30" Stroke="Black" Fill="#FFFF8080" RenderTransformOrigin="0.007,1.518"/>
-        <Label x:Name="outputLabel" Content="0" HorizontalAlignment="Left" Margin="45,106,0,0" VerticalAlignment="Top" />
-        <Button x:Name="resetButton" Content="Reset" HorizontalAlignment="Left" Margin="45,161,0,0" VerticalAlignment="Top" Click="ResetButton_Click"/>
+        <Ellipse x:Name="clockPulseLightDim" HorizontalAlignment="Left" Height="30" Margin="154,47,0,0" VerticalAlignment="Top" Width="30" Stroke="Black" Fill="#FF910505" RenderTransformOrigin="0.007,1.518"/>
+        <Ellipse x:Name="clockPulseLightLit" HorizontalAlignment="Left" Height="30" Margin="154,47,0,0" VerticalAlignment="Top" Width="30" Stroke="Black" Fill="#FFFF0000" RenderTransformOrigin="0.007,1.518" Visibility="Hidden"/>
+        <Label x:Name="outputLabel" Content="0" HorizontalAlignment="Left" Margin="114,125,0,0" VerticalAlignment="Top" />
+        <Button x:Name="resetButton" Content="Reset" HorizontalAlignment="Left" Margin="45,77,0,0" VerticalAlignment="Top" Click="ResetButton_Click"/>
+        <Label Content="Output" HorizontalAlignment="Left" Margin="45,125,0,0" VerticalAlignment="Top"/>
+        <Label Content="A Register" HorizontalAlignment="Left" Margin="45,151,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="aRegisterLabel" Content="0" HorizontalAlignment="Left" Margin="114,151,0,0" VerticalAlignment="Top"/>
+        <Label Content="B Register" HorizontalAlignment="Left" Margin="45,177,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="bRegisterLabel" Content="0" HorizontalAlignment="Left" Margin="114,178,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

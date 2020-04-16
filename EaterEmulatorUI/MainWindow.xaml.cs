@@ -37,13 +37,28 @@ namespace EaterEmulatorUI
                 {
                     Source = Emulator
                 });
+
+            aRegisterLabel.SetBinding(
+               Label.ContentProperty,
+               new Binding("A.Value")
+               {
+                   Source = Emulator
+               });
+
+            bRegisterLabel.SetBinding(
+               Label.ContentProperty,
+               new Binding("B.Value")
+               {
+                   Source = Emulator
+               });
         }
 
         private void OnRisingEdge(object sender, EventArgs e)
         {
             this.Dispatcher.Invoke(() =>
             {
-                this.clockPulseLight.Fill = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+                this.clockPulseLightDim.Visibility = Visibility.Hidden;
+                this.clockPulseLightLit.Visibility = Visibility.Visible;
             });
         }
 
@@ -51,7 +66,8 @@ namespace EaterEmulatorUI
         {
             this.Dispatcher.Invoke(() =>
             {
-                this.clockPulseLight.Fill = new SolidColorBrush(Color.FromRgb(255, 128, 128));
+                this.clockPulseLightDim.Visibility = Visibility.Visible;
+                this.clockPulseLightLit.Visibility = Visibility.Hidden;
             });
         }
 

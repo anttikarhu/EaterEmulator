@@ -14,25 +14,25 @@ namespace EaterEmulator
 
         private readonly SignalBus signals = new SignalBus();
 
-        public readonly Register A;
+        public Register A { get; internal set; }
 
-        private readonly Register B;
+        public Register B { get; internal set; }
 
-        private readonly SumRegister sum;
+        public SumRegister Sum { get; internal set; }
 
-        public readonly Register instruction;
+        public Register Instruction { get; internal set; }
 
-        private readonly FlagsRegister flags;
+        public FlagsRegister Flags { get; internal set; }
 
-        public Register Output { get; set; }
+        public Register Output { get; internal set; }
 
-        private readonly Register memoryAddress;
+        public Register MemoryAddress { get; internal set; }
 
-        public readonly Memory RAM;
+        public Memory RAM { get; internal set; }
 
-        public readonly ProgramCounter programCounter;
+        public ProgramCounter ProgramCounter { get; internal set; }
 
-        private readonly InstructionCounter instructionCounter = new InstructionCounter();
+        public InstructionCounter InstructionCounter { get; internal set; }
 
         private readonly Dictionary<byte, Operation> operations = new Dictionary<byte, Operation>();
 
@@ -41,33 +41,34 @@ namespace EaterEmulator
             this.Clock = new Clock();
             this.Clock.RisingEdge += OnRisingEdge;
 
-            this.programCounter = new ProgramCounter(this.bus, this.signals);
+            this.ProgramCounter = new ProgramCounter(this.bus, this.signals);
+            this.InstructionCounter = new InstructionCounter();
 
             this.A = new ARegister(bus, signals);
             this.B = new BRegister(bus, signals);
-            this.sum = new SumRegister(A, B, bus, signals, flagBus);
-            this.instruction = new InstructionRegister(bus, signals);
-            this.flags = new FlagsRegister(bus, signals, flagBus);
+            this.Sum = new SumRegister(A, B, bus, signals, flagBus);
+            this.Instruction = new InstructionRegister(bus, signals);
+            this.Flags = new FlagsRegister(bus, signals, flagBus);
             this.Output = new OutputRegister(bus, signals);
-            this.memoryAddress = new MemoryAddressRegister(bus, signals);
-            this.RAM = new Memory(this.bus, this.signals, this.memoryAddress);
+            this.MemoryAddress = new MemoryAddressRegister(bus, signals);
+            this.RAM = new Memory(this.bus, this.signals, this.MemoryAddress);
 
-            operations.Add(NOP.OP_CODE, new NOP(instructionCounter, signals, flags));
-            operations.Add(LDA.OP_CODE, new LDA(instructionCounter, signals, flags));
-            operations.Add(ADD.OP_CODE, new ADD(instructionCounter, signals, flags));
-            operations.Add(SUB.OP_CODE, new SUB(instructionCounter, signals, flags));
-            operations.Add(STA.OP_CODE, new STA(instructionCounter, signals, flags));
-            operations.Add(LDI.OP_CODE, new LDI(instructionCounter, signals, flags));
-            operations.Add(JMP.OP_CODE, new JMP(instructionCounter, signals, flags));
-            operations.Add(JC.OP_CODE, new JC(instructionCounter, signals, flags));
-            operations.Add(JZ.OP_CODE, new JZ(instructionCounter, signals, flags));
-            operations.Add(0b10010000, new NOP(instructionCounter, signals, flags));
-            operations.Add(0b10100000, new NOP(instructionCounter, signals, flags));
-            operations.Add(0b10110000, new NOP(instructionCounter, signals, flags));
-            operations.Add(0b11000000, new NOP(instructionCounter, signals, flags));
-            operations.Add(0b11010000, new NOP(instructionCounter, signals, flags));
-            operations.Add(OUT.OP_CODE, new OUT(instructionCounter, signals, flags));
-            operations.Add(HLT.OP_CODE, new HLT(instructionCounter, signals, flags));
+            operations.Add(NOP.OP_CODE, new NOP(InstructionCounter, signals, Flags));
+            operations.Add(LDA.OP_CODE, new LDA(InstructionCounter, signals, Flags));
+            operations.Add(ADD.OP_CODE, new ADD(InstructionCounter, signals, Flags));
+            operations.Add(SUB.OP_CODE, new SUB(InstructionCounter, signals, Flags));
+            operations.Add(STA.OP_CODE, new STA(InstructionCounter, signals, Flags));
+            operations.Add(LDI.OP_CODE, new LDI(InstructionCounter, signals, Flags));
+            operations.Add(JMP.OP_CODE, new JMP(InstructionCounter, signals, Flags));
+            operations.Add(JC.OP_CODE, new JC(InstructionCounter, signals, Flags));
+            operations.Add(JZ.OP_CODE, new JZ(InstructionCounter, signals, Flags));
+            operations.Add(0b10010000, new NOP(InstructionCounter, signals, Flags));
+            operations.Add(0b10100000, new NOP(InstructionCounter, signals, Flags));
+            operations.Add(0b10110000, new NOP(InstructionCounter, signals, Flags));
+            operations.Add(0b11000000, new NOP(InstructionCounter, signals, Flags));
+            operations.Add(0b11010000, new NOP(InstructionCounter, signals, Flags));
+            operations.Add(OUT.OP_CODE, new OUT(InstructionCounter, signals, Flags));
+            operations.Add(HLT.OP_CODE, new HLT(InstructionCounter, signals, Flags));
         }
 
         private void OnRisingEdge(object? sender, System.EventArgs e)
@@ -84,29 +85,29 @@ namespace EaterEmulator
 
             signals.Reset();
 
-            Operation operation = GetOperation(instruction.Value);
+            Operation operation = GetOperation(Instruction.Value);
 
             operation.Clk();
-            instructionCounter.Clk();
+            InstructionCounter.Clk();
 
             RAM.WriteToBus();
-            instruction.WriteToBus();
-            programCounter.WriteToBus();
-            memoryAddress.WriteToBus();
-            sum.WriteToBus();
+            Instruction.WriteToBus();
+            ProgramCounter.WriteToBus();
+            MemoryAddress.WriteToBus();
+            Sum.WriteToBus();
             A.WriteToBus();
             B.WriteToBus();
-            flags.WriteToBus();
+            Flags.WriteToBus();
             Output.WriteToBus();
 
             RAM.ReadFromBus();
-            instruction.ReadFromBus();
-            programCounter.ReadFromBus();
-            memoryAddress.ReadFromBus();
-            sum.ReadFromBus();
+            Instruction.ReadFromBus();
+            ProgramCounter.ReadFromBus();
+            MemoryAddress.ReadFromBus();
+            Sum.ReadFromBus();
             A.ReadFromBus();
             B.ReadFromBus();
-            flags.ReadFromBus();
+            Flags.ReadFromBus();
             Output.ReadFromBus();
 
             if (signals.HLT)
@@ -126,15 +127,15 @@ namespace EaterEmulator
 
         public void Reset()
         {
-            instructionCounter.Reset();
-            programCounter.Reset();
+            InstructionCounter.Reset();
+            ProgramCounter.Reset();
             A.Reset();
             B.Reset();
-            flags.Reset();
-            instruction.Reset();
-            memoryAddress.Reset();
+            Flags.Reset();
+            Instruction.Reset();
+            MemoryAddress.Reset();
             Output.Reset();
-            sum.Reset();
+            Sum.Reset();
         }
 
         public Operation GetOperation(byte instructionRegisterValue)
