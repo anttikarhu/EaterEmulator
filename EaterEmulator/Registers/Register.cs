@@ -1,6 +1,9 @@
-﻿namespace EaterEmulator.Registers
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace EaterEmulator.Registers
 {
-    public abstract class Register
+    public abstract class Register : IBusConnectedModule, IResetableModule, INotifyPropertyChanged
     {
         public DataBus Bus { get; internal set; }
 
@@ -12,10 +15,32 @@
             this.Signals = signals;
         }
 
-        public virtual byte Value { get; set; }
+        private byte value;
+
+        public virtual byte Value
+        {
+            get { return value; }
+            set
+            {
+                this.value = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public virtual void ReadFromBus() { }
 
         public virtual void WriteToBus() { }
+
+        public void Reset()
+        {
+            Value = 0;
+        }
+
+        protected void OnPropertyChanged([CallerMemberName] string? name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
     }
 }

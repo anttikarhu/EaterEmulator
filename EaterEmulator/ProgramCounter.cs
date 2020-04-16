@@ -1,6 +1,6 @@
 ﻿namespace EaterEmulator.Registers
 {
-    public class ProgramCounter
+    public class ProgramCounter : IBusConnectedModule, IResetableModule
     {
         public byte Value { get; set; }
 
@@ -37,6 +37,11 @@
             {
                 bus.Value = Value;
             }
+        }
+
+        public void Reset()
+        {
+            Value = 0;
         }
     }
 }

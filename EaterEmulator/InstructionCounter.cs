@@ -1,6 +1,6 @@
 ﻿namespace EaterEmulator
 {
-    public class InstructionCounter
+    public class InstructionCounter : IResetableModule
     {
         public byte Value { get; private set; }
 
@@ -12,6 +12,11 @@
             {
                 Value = 0;
             }
+        }
+
+        public void Reset()
+        {
+            Value = 0;
         }
     }
 }

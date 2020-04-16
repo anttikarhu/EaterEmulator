@@ -2,7 +2,7 @@
 
 namespace EaterEmulator
 {
-    public class Memory
+    public class Memory : IBusConnectedModule
     {
         private byte[] data = new byte[16];
 

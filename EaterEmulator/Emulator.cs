@@ -6,6 +6,8 @@ namespace EaterEmulator
 {
     public class Emulator
     {
+        public Clock Clock { get; internal set; }
+
         private readonly DataBus bus = new DataBus();
 
         private readonly FlagBus flagBus = new FlagBus();
@@ -22,7 +24,7 @@ namespace EaterEmulator
 
         private readonly FlagsRegister flags;
 
-        public readonly Register output;
+        public Register Output { get; set; }
 
         private readonly Register memoryAddress;
 
@@ -32,12 +34,13 @@ namespace EaterEmulator
 
         private readonly InstructionCounter instructionCounter = new InstructionCounter();
 
-        public bool IsHalted { get; set; }
-
         private readonly Dictionary<byte, Operation> operations = new Dictionary<byte, Operation>();
 
         public Emulator()
         {
+            this.Clock = new Clock();
+            this.Clock.RisingEdge += OnRisingEdge;
+
             this.programCounter = new ProgramCounter(this.bus, this.signals);
 
             this.A = new ARegister(bus, signals);
@@ -45,7 +48,7 @@ namespace EaterEmulator
             this.sum = new SumRegister(A, B, bus, signals, flagBus);
             this.instruction = new InstructionRegister(bus, signals);
             this.flags = new FlagsRegister(bus, signals, flagBus);
-            this.output = new OutputRegister(bus, signals);
+            this.Output = new OutputRegister(bus, signals);
             this.memoryAddress = new MemoryAddressRegister(bus, signals);
             this.RAM = new Memory(this.bus, this.signals, this.memoryAddress);
 
@@ -67,9 +70,14 @@ namespace EaterEmulator
             operations.Add(HLT.OP_CODE, new HLT(instructionCounter, signals, flags));
         }
 
+        private void OnRisingEdge(object? sender, System.EventArgs e)
+        {
+            Clk();
+        }
+
         public void Clk()
         {
-            if (IsHalted)
+            if (Clock.IsHalted)
             {
                 return;
             }
@@ -89,7 +97,7 @@ namespace EaterEmulator
             A.WriteToBus();
             B.WriteToBus();
             flags.WriteToBus();
-            output.WriteToBus();
+            Output.WriteToBus();
 
             RAM.ReadFromBus();
             instruction.ReadFromBus();
@@ -99,11 +107,11 @@ namespace EaterEmulator
             A.ReadFromBus();
             B.ReadFromBus();
             flags.ReadFromBus();
-            output.ReadFromBus();
+            Output.ReadFromBus();
 
             if (signals.HLT)
             {
-                IsHalted = true;
+                Clock.IsHalted = true;
             }
         }
 
@@ -114,6 +122,19 @@ namespace EaterEmulator
             Clk();
             Clk();
             Clk();
+        }
+
+        public void Reset()
+        {
+            instructionCounter.Reset();
+            programCounter.Reset();
+            A.Reset();
+            B.Reset();
+            flags.Reset();
+            instruction.Reset();
+            memoryAddress.Reset();
+            Output.Reset();
+            sum.Reset();
         }
 
         public Operation GetOperation(byte instructionRegisterValue)
